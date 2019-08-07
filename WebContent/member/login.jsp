@@ -164,6 +164,7 @@ function onSignIn(googleUser) {
     }
 </script>
  -->
+ <!--
  <script type='text/javascript'>
   //<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.
@@ -180,6 +181,7 @@ function onSignIn(googleUser) {
     });
   //]]>
 </script>
+-->
 <script type='text/javascript'>
   //<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.
