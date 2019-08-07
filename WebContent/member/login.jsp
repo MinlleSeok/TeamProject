@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
 <title>VANCO : mmProject</title>
 <link href="/mmProject/css/member/login.css" type="text/css" rel="stylesheet">
 <link href="/mmProject/css/index/common.css" type="text/css" rel="stylesheet">
@@ -52,6 +54,7 @@
         });
   }
   </script>
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 </head>
 <body>
@@ -85,7 +88,7 @@
 			 	 
 			    <p class="snsLogTit">SNS 계정으로 로그인</p>
 			</form>	 	 
-			<a  href="javascript:loginWithKakao()"  class="clickBtn kakao mouseHand">카카오 로그인</a>   
+			<a href="javascript:loginWithKakao()" id="custom-login-btn" class="clickBtn kakao mouseHand">카카오 로그인</a>   
 			<button class="clickBtn naver mouseHand" >네이버 로그인</button> 
 			
 			<button class="clickBtn google mouseHand customGPlusSignIn" id="customBtn">구글 로그인</button>
@@ -161,6 +164,59 @@ function onSignIn(googleUser) {
     }
 </script>
  -->
+ <script type='text/javascript'>
+  //<![CDATA[
+    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('05d13a0c3036d9bc69e650dda71cf4f9');
+    // 카카오 로그인 버튼을 생성합니다.
+    Kakao.Auth.createLoginButton({
+      container: '#kakao-login-btn',
+      success: function(authObj) {
+        alert(JSON.stringify(authObj));
+      },
+      fail: function(err) {
+         alert(JSON.stringify(err));
+      }
+    });
+  //]]>
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    // 사용할 앱의 JavaScript 키를 설정해 주세요.
+    Kakao.init('05d13a0c3036d9bc69e650dda71cf4f9');
+    function loginWithKakao() {
+      // 로그인 창을 띄웁니다.
+      Kakao.Auth.login({
+        success: function(authObj) {
+          alert(JSON.stringify(authObj));
+       // 로그인 성공시, API를 호출합니다.
+          Kakao.API.request({
+            url: '/v2/user/me',
+            success: function(res) {
+              alert(JSON.stringify(res));
+              console.log(res);
+              console.log(res.properties);
+              var xhr = new XMLHttpRequest();
+              xhr.open('POST', '../KakaoLoginCheck');
+              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+              xhr.onload = function() {
+                console.log('Signed in as: ' + xhr.responseText);
+                location.href= "../index.jsp";
+              };
+              xhr.send('idtoken=' + res.id);
+            },
+            fail: function(error) {
+              alert(JSON.stringify(error));
+            }
+          });
+        },
+        fail: function(err) {
+          alert(JSON.stringify(err));
+        }
+      });
+    };
+  //]]>
+</script>
 <script>startApp();</script>
 </body>
 </html>
