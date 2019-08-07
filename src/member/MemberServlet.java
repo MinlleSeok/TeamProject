@@ -54,41 +54,8 @@ public class MemberServlet extends HttpServlet {
 		forward.setRedirect(false);
 		
 		//이동할 페이지 경로 주소값 저장
-		forward.setPath("/index.jsp");	
+		forward.setPath("/index.jsp");		
 
-		
-// 카카오톡 회원가입 아이디 존재 여부 확인 및 id존재 시 로그인 처리. idChk		
-	}else if(command.equals("/snsIdChk.me")){
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html, charset=utf-8");
-						
-		System.out.println("sns아이디체크 호출 됨.");	
-		
-		// 전송된 id로 DB에 ID존재 여부 확인 후 ajax기술을 이용하여 결과값을 리턴 한다.
-		String userId = request.getParameter("userId");	
-		System.out.println("서블릿으로 넘어온 Id값 :"+userId);
-		
-		
-		action=new snsIdChkAction();		
-		try {
-			forward=action.execute(request, response);			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	//카카오톡 회원가입 액션 	
-	}else if(command.equals("/snsUserJoinAction.me")){
-		System.out.println("sns로그인 호출됨");
-		
-		String userId = request.getParameter("userId");			
-		System.out.println("snsUserJoin 호출 id :"+userId);
-		
-		action=new snsUserJoinAction();		
-		try {
-			forward=action.execute(request, response);			
-		} catch (Exception e) {
-			System.out.println("snsUserJoinAction에러"+e);
-		}	
 	}
 	
 	
