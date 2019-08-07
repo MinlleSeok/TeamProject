@@ -196,6 +196,7 @@ function onSignIn(googleUser) {
               alert(JSON.stringify(res));
               console.log(res);
               console.log(res.properties);
+              
               var xhr = new XMLHttpRequest();
               xhr.open('POST', '../KakaoLoginCheck');
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
