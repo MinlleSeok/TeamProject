@@ -16,6 +16,42 @@
 <!-- <meta name="google-signin-client_id" content="668617944084-jm7kn0qjgu77fea46b01at3osp43182a.apps.googleusercontent.com">	 -->
 <script src="https://apis.google.com/js/api:client.js"></script>
   <script>
+  var xhr = null;
+
+  function getXMLHttpRequest() {
+
+  	if (window.ActiveXObject) {
+
+  		try {
+
+  			return new ActiveXObject("Msxml2.XMLHTTP");
+
+  		} catch (e) {
+
+  			try {
+
+  				return new ActiveXObject("Microsoft.XMLHTTP");
+
+  			} catch (e1) {
+
+  				return null;
+
+  			}
+
+  		}
+
+  } else if(window.XMLHttpRequest){
+
+  	return new XMLHttpRequest();
+
+  } else {
+
+  	return null;
+
+  }
+
+  }
+  
   var googleUser = {};
   var startApp = function() {
     gapi.load('auth2', function(){
@@ -41,12 +77,22 @@
           var id_token = googleUser.getAuthResponse().id_token;
           // console.log("ID Token: " + id_token);
           
-          var xhr = new XMLHttpRequest();
+          xhr = getXMLHttpRequest();
           xhr.open('POST', '/mmProject/LoginCheck');
           xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-          xhr.onload = function() {
-          	location.href = "/mmProject/index.jsp";
-          };
+          xhr.onreadystatechange = function() { // onreadystatechange 이벤트 핸들러를 작성함.
+
+      	    // 서버상에 문서가 존재하고 요청한 데이터의 처리가 완료되어 응답할 준비가 완료되었을 때
+
+      	    if(this.status == 200 && this.readyState == this.DONE) {
+
+      	        // 요청한 데이터를 문자열로 반환함.
+      	        
+      	    	location.href= "../index.jsp";         
+
+      	    }
+
+      	};
           xhr.send('idtoken=' + id_token);
         
         }, function(error) {
@@ -199,13 +245,26 @@ function onSignIn(googleUser) {
               console.log(res);
               console.log(res.properties);
               
-              var xhr = new XMLHttpRequest();
+              xhr = getXMLHttpRequest();
               xhr.open('POST', '../KakaoLoginCheck');
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-              xhr.onload = function() {
+              xhr.onreadystatechange = function() { // onreadystatechange 이벤트 핸들러를 작성함.
+
+            	    // 서버상에 문서가 존재하고 요청한 데이터의 처리가 완료되어 응답할 준비가 완료되었을 때
+
+            	    if(this.status == 200 && this.readyState == this.DONE) {
+
+            	        // 요청한 데이터를 문자열로 반환함.
+            	        
+            	    	location.href= "../index.jsp";         
+
+            	    }
+
+            	};
+              /*xhr.onload = function() {
                 console.log('Signed in as: ' + xhr.responseText);
                 location.href= "../index.jsp";
-              };
+              };*/
               xhr.send('idtoken=' + res.id);
             },
             fail: function(error) {
