@@ -56,11 +56,11 @@ $(document).ready(function(){
 	
 	<%-- <!-- 메인 슬라이드 -->	
 		<jsp:include page="inc/mainSlide.jsp"/>	 --%>
-	<!-- 위클리 인기 갤러리 -->	
+	<!-- 인기 갤러리 -->	
 		<jsp:include page="inc/weeklyPop.jsp"/>
-	<!-- 훈련과 행동교정 매거진 -->	
+	<!-- 매거진 -->	
 		<jsp:include page="inc/mainMagazine.jsp"/>		
-	<!-- 견종별 커뮤니티 -->		
+	<!-- 전국 커뮤니티 -->		
 		<jsp:include page="inc/dogKindBoard.jsp"/>		
 	<!-- 오늘의 조회수 베스트 -->		
 		<jsp:include page="inc/bestClick.jsp"/>	
