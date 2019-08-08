@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%String path = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <!-- CSS 연결 -->
-<link href="/mmProject/css/index/index.css" type="text/css" rel="stylesheet">
-<link href="/mmProject/css/index/common.css" type="text/css" rel="stylesheet">
-<link href="/mmProject/css/inc/header.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/index/index.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/index/common.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/inc/header.css" type="text/css" rel="stylesheet">
 
 
 <!-- JNDI 사용을 위한 태그 선언 -->
@@ -18,7 +19,7 @@
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 <!-- bxSlider 플러그인 연동 -->
-<link href="/mmProject/css/plugin/jquery.bxslider.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/plugin/jquery.bxslider.css" type="text/css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 <script type="text/javascript">

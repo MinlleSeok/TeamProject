@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="v"%>   
+ <%String path = request.getContextPath();%>
  
  <!-- 로그인 페이지 url 설정 -->		
 
@@ -13,8 +14,8 @@
 		
 		<nav class="headLeft">
 			<ul>
-				<li><a href="#a"><span id="seeAll">카테고리</span></a></li>				
-				<li><a href="#a"><span>카테고리</span></a></li>
+				<li><a href=""><span id="seeAll">전체보기</span></a></li>				
+				<li><a href="<%=path%>/moim/moimIndex.jsp"><span>작업1</span></a></li>
 				<li><a href="#"><span>카테고리</span></a></li>
 				<li><a href="#"><span>카테고리</span></a></li>
 			</ul>
@@ -32,8 +33,8 @@
 	
 	<nav class="headRight">
 		<ul>
-			<li class="userJoin"><a href="./userJoin.me">회원가입</a></li>			
-			<li><a href="/mmProject/member/login.jsp">로그인</a></li>				
+			<li class="userJoin"><a href="<%=path%>/member/userJoin.jsp">회원가입</a></li>			
+			<li><a href="<%=path%>/member/login.jsp">로그인</a></li>				
 		</ul>
 	</nav>					
 

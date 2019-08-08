@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="v"%>  
+<%String path = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>VANCO : 우리동네 반려견 커뮤니티</title>
+<title>mmProject</title>
 
-<link href="/mmProject/css/member/userJoin.css" type="text/css" rel="stylesheet">
-<link href="/mmProject/css/index/common.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/member/userJoin.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/index/common.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -48,6 +49,26 @@
 </script>
 
 
+<script type="text/javascript">
+/* check박스 전체선택 jQuery */
+$(document).ready(function(){
+	$("#checkAll").on("click", function(){
+        if($("#checkAll").prop("checked")){
+            $("input[class=agree]").prop("checked",true);
+        }else{
+            $("input[class=agree]").prop("checked",false);
+        }
+    });
+  $("input[class=agree]").on("click", function(){
+  if($(this).is(":checked") == false){
+   $("#checkAll").prop("checked",false)
+  }
+  });
+});
+
+</script>
+
+
 
 
 
@@ -61,7 +82,25 @@
 			  	
 			  	<p class="snsLogTit">신규 회원가입</p>
 			  	
-				<%@ include file="agreeBox.jsp" %>
+				
+				<div class="agreeBox">
+				  	<div class="checkBox">
+			        	<span class="agreeAll">약관 동의</span>
+			        	<input type="checkbox" class="agreeAll" id="checkAll">
+			        	<label class="agreeAll" for="agreeAll">전체 동의</label>
+			        </div>
+			        <div class="checkBox">
+			        	<a href="">이용약관</a>
+			        	<input type="checkbox" class="agree" name="agree1" id="userAgreement">
+			        	<label class="" for="userAgreement">동의(필수)</label>
+			        </div>
+			        <div class="checkBox">
+			        	<a href="">개인정보 취급방침</a>
+			        	<input type="checkbox" class="agree" name="agree2"  id="privacy">
+			        	<label class="" for="privacy">동의(필수)</label>
+			        </div>    
+			 	 </div>
+
 			 	 
 			 	<button class="clickBtn kakao mouseHand" onclick="agreeCheck2()">카카오톡으로 가입하기</button>
 			 	<button class="clickBtn naver mouseHand" onclick="agreeCheck()">네이버로 가입하기</button>
@@ -69,7 +108,7 @@
 			 	<a class="clickBtn idJoin mouseHand" onclick="agreeCheck1()">아이디로 가입하기</a>
 			 	
 			</form>	
-	 		<p class="joinLink">아이디가 있으신가요?&nbsp; <a href="/mmProject/member/login.jsp"> 로그인</a></p>	
+	 		<p class="joinLink">아이디가 있으신가요?&nbsp; <a href="<%=path%>/member/login.jsp"> 로그인</a></p>	
 	 		<p class="copyR">&copy; mmProject :: since 2019</p>
 	</div>
 	
