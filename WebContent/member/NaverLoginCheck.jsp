@@ -9,7 +9,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>NaverLoginSDK</title>
 </head>
-
+<form action="../NaverLoginCheck" id="fr" method="post">
+<input type="hidden" id="email" name="email">
+</form>
 <body>
 
 	callback 처리중입니다. 이 페이지에서는 callback을 처리하고 바로 main으로 redirect하기때문에 이 메시지가 보이면 안됩니다.
@@ -46,7 +48,11 @@
 						return;
 					}
 
-					window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/sample/main.html");
+					fr.email.value = email;
+					fr.sumbit();
+					// window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/NaverLoginCheck");
+					
+					
 				} else {
 					console.log("callback 처리에 실패하였습니다.");
 				}

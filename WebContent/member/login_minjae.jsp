@@ -12,95 +12,8 @@
 <link href="<%=path%>/css/member/login.css" type="text/css" rel="stylesheet">
 <link href="<%=path%>/css/index/common.css" type="text/css" rel="stylesheet">
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-<!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
-<!-- <meta name="google-signin-client_id" content="668617944084-jm7kn0qjgu77fea46b01at3osp43182a.apps.googleusercontent.com">	 -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>	 -->
 <script src="https://apis.google.com/js/api:client.js"></script>
-  <script>
-  var xhr = null;
-
-  function getXMLHttpRequest() {
-
-  	if (window.ActiveXObject) {
-
-  		try {
-
-  			return new ActiveXObject("Msxml2.XMLHTTP");
-
-  		} catch (e) {
-
-  			try {
-
-  				return new ActiveXObject("Microsoft.XMLHTTP");
-
-  			} catch (e1) {
-
-  				return null;
-
-  			}
-
-  		}
-
-  } else if(window.XMLHttpRequest){
-
-  	return new XMLHttpRequest();
-
-  } else {
-
-  	return null;
-
-  }
-
-  }
-  
-  var googleUser = {};
-  var startApp = function() {
-    gapi.load('auth2', function(){
-      // Retrieve the singleton for the GoogleAuth library and set up the client.
-      auth2 = gapi.auth2.init({
-        client_id: '668617944084-5is0mb0j9q7p9pp2rugimnttsfi6mdld.apps.googleusercontent.com',
-        cookiepolicy: 'single_host_origin',
-        // Request scopes in addition to 'profile' and 'email'
-        // scope: 'profile'
-      });
-      attachSignin(document.getElementById('customBtn'));
-    });
-  };
-
-  function attachSignin(element) {
-    console.log(element.id);
-    auth2.attachClickHandler(element, {},
-        function(googleUser) {
-          document.getElementById('name').innerText = "Signed in: " +
-              googleUser.getBasicProfile().getName();
-          
-       // The ID token you need to pass to your backend:
-          var id_token = googleUser.getAuthResponse().id_token;
-          // console.log("ID Token: " + id_token);
-          
-          xhr = getXMLHttpRequest();
-          xhr.open('POST', '<%=path%>/LoginCheck');
-          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-          xhr.onreadystatechange = function() { // onreadystatechange 이벤트 핸들러를 작성함.
-
-      	    // 서버상에 문서가 존재하고 요청한 데이터의 처리가 완료되어 응답할 준비가 완료되었을 때
-
-      	    if(this.status == 200 && this.readyState == this.DONE) {
-
-      	        // 요청한 데이터를 문자열로 반환함.
-      	        
-      	    	location.href= "../index.jsp";         
-
-      	    }
-
-      	};
-          xhr.send('idtoken=' + id_token);
-        
-        }, function(error) {
-          alert(JSON.stringify(error, undefined, 2));
-        });
-  }
-  </script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
@@ -147,90 +60,85 @@
 	 		<p class="joinLink">아이디가 없으신가요?&nbsp; <a href="<%=path%>/member/userJoin.jsp"> 회원가입</a></p>	
 	 	
 	</div>
-	<!-- 
-	<script type="text/javascript">
-function onSignIn(googleUser) {
-	  var profile = googleUser.getBasicProfile();
-	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	  console.log('Name: ' + profile.getName());
-	  console.log('Image URL: ' + profile.getImageUrl());
-	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 	
-	  // The ID token you need to pass to your backend:
-      var id_token = googleUser.getAuthResponse().id_token;
-      console.log("ID Token: " + id_token);
-      
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', './LoginCheck');
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.onload = function() {
-        console.log('Signed in as: ' + xhr.responseText);
-      };
-      xhr.send('idtoken=' + id_token);
-	}
-	
-  function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
+<!-- IE 호환성 Script -->
+<script type="text/javascript">
+  var xhr = null;
+
+  function getXMLHttpRequest() {
+
+  	if (window.ActiveXObject) {
+
+  		try {
+
+  			return new ActiveXObject("Msxml2.XMLHTTP");
+
+  		} catch (e) {
+
+  			try {
+
+  				return new ActiveXObject("Microsoft.XMLHTTP");
+
+  			} catch (e1) {
+
+  				return null;
+
+  			}
+
+  		}
+
+  } else if(window.XMLHttpRequest){
+
+  	return new XMLHttpRequest();
+
+  } else {
+
+  	return null;
+
+  }
+
   }
   
-  function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-      var profile = googleUser.getBasicProfile();
-	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	  console.log('Name: ' + profile.getName());
-	  console.log('Image URL: ' + profile.getImageUrl());
-	  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+</script>	
+<!-- // IE 호환성 Script -->
 	
-	  // The ID token you need to pass to your backend:
-      var id_token = googleUser.getAuthResponse().id_token;
-      console.log("ID Token: " + id_token);
-      
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', './LoginCheck');
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.onload = function() {
-        console.log('Signed in as: ' + xhr.responseText);
-      };
-      xhr.send('idtoken=' + id_token);
-    }
-    function onFailure(error) {
-      console.log(error);
-    }
-    function renderButton() {
-      gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
-        'width': 240,
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onSuccess,
-        'onfailure': onFailure
-      });
-    }
-</script>
- -->
- <!--
- <script type='text/javascript'>
-  //<![CDATA[
-    // 사용할 앱의 JavaScript 키를 설정해 주세요.
-    Kakao.init('05d13a0c3036d9bc69e650dda71cf4f9');
-    // 카카오 로그인 버튼을 생성합니다.
-    Kakao.Auth.createLoginButton({
-      container: '#kakao-login-btn',
-      success: function(authObj) {
-        alert(JSON.stringify(authObj));
-      },
-      fail: function(err) {
-         alert(JSON.stringify(err));
-      }
-    });
-  //]]>
-</script>
--->
+<!-- 카카오 아이디로 로그인 초기화 Script -->
 <script type='text/javascript'>
+var xhr = null;
+
+function getXMLHttpRequest() {
+
+	if (window.ActiveXObject) {
+
+		try {
+
+			return new ActiveXObject("Msxml2.XMLHTTP");
+
+		} catch (e) {
+
+			try {
+
+				return new ActiveXObject("Microsoft.XMLHTTP");
+
+			} catch (e1) {
+
+				return null;
+
+			}
+
+		}
+
+} else if(window.XMLHttpRequest){
+
+	return new XMLHttpRequest();
+
+} else {
+
+	return null;
+
+}
+
+}
   //<![CDATA[
     // 사용할 앱의 JavaScript 키를 설정해 주세요.
     Kakao.init('05d13a0c3036d9bc69e650dda71cf4f9');
@@ -281,13 +189,14 @@ function onSignIn(googleUser) {
     };
   //]]>
 </script>
+<!-- // 카카오 아이디로 로그인 초기화 Script -->
 
-<!-- 네이버아디디로로그인 초기화 Script -->
+<!-- 네이버 아이디로 로그인 초기화 Script -->
 <script type="text/javascript">
 	var naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "uKiP2ZjjUHfxjMGZTcN7",
-			callbackUrl: "http://localhost:8090/mmProject/NaverloginCheck",
+			callbackUrl: "http://localhost:8090/mmProject/NaverloginCheck.jsp",
 			isPopup: true, /* 팝업을 통한 연동처리 여부 */
 			loginButton: {color: "green", type: 2, height: 30} /* 로그인 버튼의 타입을 지정 */
 		}
@@ -297,8 +206,97 @@ function onSignIn(googleUser) {
 	naverLogin.init();
 	
 </script>
-<!-- // 네이버아이디로로그인 초기화 Script -->
+<!-- // 네이버 아이디로 로그인 초기화 Script -->
 
+<!-- 구글 아이디로 로그인 초기화 Script -->
+<script type="text/javascript">
+var xhr = null;
+
+function getXMLHttpRequest() {
+
+	if (window.ActiveXObject) {
+
+		try {
+
+			return new ActiveXObject("Msxml2.XMLHTTP");
+
+		} catch (e) {
+
+			try {
+
+				return new ActiveXObject("Microsoft.XMLHTTP");
+
+			} catch (e1) {
+
+				return null;
+
+			}
+
+		}
+
+} else if(window.XMLHttpRequest){
+
+	return new XMLHttpRequest();
+
+} else {
+
+	return null;
+
+}
+
+}
+
+var googleUser = {};
+  var startApp = function() {
+    gapi.load('auth2', function(){
+      // Retrieve the singleton for the GoogleAuth library and set up the client.
+      auth2 = gapi.auth2.init({
+        client_id: '668617944084-5is0mb0j9q7p9pp2rugimnttsfi6mdld.apps.googleusercontent.com',
+        cookiepolicy: 'single_host_origin',
+        // Request scopes in addition to 'profile' and 'email'
+        // scope: 'profile'
+      });
+      attachSignin(document.getElementById('customBtn'));
+    });
+  };
+
+  function attachSignin(element) {
+    console.log(element.id);
+    auth2.attachClickHandler(element, {},
+        function(googleUser) {
+          document.getElementById('name').innerText = "Signed in: " +
+              googleUser.getBasicProfile().getName();
+          
+       // The ID token you need to pass to your backend:
+          var id_token = googleUser.getAuthResponse().id_token;
+          console.log("ID Token: " + id_token);
+          
+          xhr = getXMLHttpRequest();
+          xhr.open('POST', '../GoogleLoginCheck');
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          xhr.onreadystatechange = function() { // onreadystatechange 이벤트 핸들러를 작성함.
+
+      	    // 서버상에 문서가 존재하고 요청한 데이터의 처리가 완료되어 응답할 준비가 완료되었을 때
+
+      	    if(this.status == 200 && this.readyState == this.DONE) {
+
+      	        // 요청한 데이터를 문자열로 반환함.
+      	        
+      	    	// location.href = "../index.jsp";
+      	    	window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/index.jsp");
+
+      	    }
+
+      	};
+          xhr.send('idtoken=' + id_token);
+        
+        }, function(error) {
+          alert(JSON.stringify(error, undefined, 2));
+        });
+  }
+  </script>
+  <!-- // 구글 아이디로 로그인 초기화 Script -->
+  
 <script>startApp();</script>
 </body>
 </html>

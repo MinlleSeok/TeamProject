@@ -19,5 +19,22 @@
   	<url-pattern>*.me</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>GoogleLogin</servlet-name>
+  	<servlet-class>member.GoogleLoginCheck</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>GoogleLogin</servlet-name>
+  	<url-pattern>/GoogleLoginCheck</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>KakaoLogin</servlet-name>
+  	<servlet-class>member.KakaoLoginCheck</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>KakaoLogin</servlet-name>
+  	<url-pattern>/KakaoLoginCheck</url-pattern>
+  </servlet-mapping>
   
 </web-app>
