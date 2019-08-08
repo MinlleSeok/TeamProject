@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="v"%>  
+<%String path = request.getContextPath(); %>
 <!DOCTYPE html>
 <html>
 <head>
 
-<link href="/mmProject/css/member/login.css" type="text/css" rel="stylesheet">
-<link href="/mmProject/css/index/common.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/member/login.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/index/common.css" type="text/css" rel="stylesheet">
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 	
@@ -51,7 +52,7 @@
 			<button class="clickBtn google mouseHand" >구글 로그인</button>
 			 	 
 			<p class="copyR">&copy; mmProject :: since 2019</p>			
-	 		<p class="joinLink">아이디가 없으신가요?&nbsp; <a href="/mmProject/member/userJoin.jsp"> 회원가입</a></p>	
+	 		<p class="joinLink">아이디가 없으신가요?&nbsp; <a href="<%=path%>/member/userJoin.jsp"> 회원가입</a></p>	
 	 		
 	 		<script type='text/javascript'>
 			  // 사용할 앱의 JavaScript 키를 설정해 주세요.

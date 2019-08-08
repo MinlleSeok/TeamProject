@@ -1,13 +1,14 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%String path = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link href="/vc/css/member/userJoin.css" type="text/css" rel="stylesheet">
-<link href="/vc/css/index/common.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/member/userJoin.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/index/common.css" type="text/css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 
@@ -19,8 +20,8 @@
 <div class ="loginSec" >	
 	<form onsubmit="return joinCheck()" class="idLogin loginSec" action="userJoinAction.me" method="post" name="vancoUserJoin"> <!--  userJoinProc.jsp -->
 		<div class="loginHead">					
-	    	<a href="./vanco.me" class="vcLogo center">VANCO</a>
-	    	<p class="loginIntro">우리동네 반려견 커뮤니티</p>
+	    	<a href="./mm.me" class="vcLogo center">VANCO</a>
+	    	<p class="loginIntro">mmProject</p>
 	  	</div>
 	  	
 		<p class="snsLogTit">아이디로 회원가입</p>  

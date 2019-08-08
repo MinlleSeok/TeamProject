@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="v"%>  
+<%String path = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +9,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
 <title>VANCO : mmProject</title>
-<link href="/mmProject/css/member/login.css" type="text/css" rel="stylesheet">
-<link href="/mmProject/css/index/common.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/member/login.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/index/common.css" type="text/css" rel="stylesheet">
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script> -->
@@ -78,7 +79,7 @@
           // console.log("ID Token: " + id_token);
           
           xhr = getXMLHttpRequest();
-          xhr.open('POST', '/mmProject/LoginCheck');
+          xhr.open('POST', '<%=path%>/LoginCheck');
           xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
           xhr.onreadystatechange = function() { // onreadystatechange 이벤트 핸들러를 작성함.
 
@@ -142,7 +143,7 @@
 			<div class="g-signin2" data-onsuccess="onSignIn"></div>
 			 	 
 			<p class="copyR">&copy; mmProject :: since 2019</p>			
-	 		<p class="joinLink">아이디가 없으신가요?&nbsp; <a href="/mmProject/member/userJoin.jsp"> 회원가입</a></p>	
+	 		<p class="joinLink">아이디가 없으신가요?&nbsp; <a href="<%=path%>/member/userJoin.jsp"> 회원가입</a></p>	
 	 	
 	</div>
 	<!-- 

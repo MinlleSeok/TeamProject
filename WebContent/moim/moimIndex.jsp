@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%String path = request.getContextPath();
-System.out.
-%>
+<%String path = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>mmProject</title>
-<link href="/mmProject/css/index/common.css" type="text/css" rel="stylesheet">
-<link href="/mmProject/css/inc/header.css" type="text/css" rel="stylesheet">
-<link href="/mmProject/css/moim/moimIndex.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/index/common.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/inc/header.css" type="text/css" rel="stylesheet">
+<link href="<%=path%>/css/moim/moimIndex.css" type="text/css" rel="stylesheet">
 
 </head>
 
