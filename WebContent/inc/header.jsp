@@ -32,10 +32,17 @@
 		
 	
 	<nav class="headRight">
+	<% if(session.getAttribute("id") == null) { %>
 		<ul>
 			<li class="userJoin"><a href="<%=path%>/member/userJoin.jsp">회원가입</a></li>			
 			<li><a href="<%=path%>/member/login.jsp">로그인</a></li>				
 		</ul>
+		<%} else { %>
+			<ul>
+			<li class="userJoin"><%=session.getAttribute("id") %></li>			
+			<li><a href="<%=path%>/member/login.jsp">로그아웃</a></li>				
+			</ul>
+		<% } %>
 	</nav>					
 
 	</div>	

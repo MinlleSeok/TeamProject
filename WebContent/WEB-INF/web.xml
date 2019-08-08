@@ -14,6 +14,7 @@
   	<servlet-name>MemberServlet</servlet-name>
   	<servlet-class>member.MemberServlet</servlet-class>
   </servlet>    
+  
   <servlet-mapping>
  	<servlet-name>MemberServlet</servlet-name>
   	<url-pattern>*.me</url-pattern>
@@ -23,6 +24,7 @@
   	<servlet-name>GoogleLogin</servlet-name>
   	<servlet-class>member.GoogleLoginCheck</servlet-class>
   </servlet>
+  
   <servlet-mapping>
   	<servlet-name>GoogleLogin</servlet-name>
   	<url-pattern>/GoogleLoginCheck</url-pattern>
@@ -32,6 +34,7 @@
   	<servlet-name>KakaoLogin</servlet-name>
   	<servlet-class>member.KakaoLoginCheck</servlet-class>
   </servlet>
+  
   <servlet-mapping>
   	<servlet-name>KakaoLogin</servlet-name>
   	<url-pattern>/KakaoLoginCheck</url-pattern>

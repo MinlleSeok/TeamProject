@@ -1,3 +1,6 @@
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.math.BigInteger"%>
+<%@page import="java.security.SecureRandom"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="v"%>  
@@ -12,7 +15,7 @@
 <link href="<%=path%>/css/member/login.css" type="text/css" rel="stylesheet">
 <link href="<%=path%>/css/index/common.css" type="text/css" rel="stylesheet">
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>	 -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="https://apis.google.com/js/api:client.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
@@ -50,7 +53,20 @@
 			    <p class="snsLogTit">SNS 계정으로 로그인</p>
 			</form>	 	 
 			<a href="javascript:loginWithKakao()" id="custom-login-btn" class="clickBtn kakao mouseHand">카카오 로그인</a>   
-			<button class="clickBtn naver mouseHand" id="naverIdLogin">네이버 로그인</button> 
+			
+			<%
+			    String clientId = "uKiP2ZjjUHfxjMGZTcN7";
+			    String redirectURI = URLEncoder.encode("http://localhost:8090/mmProject/NaverloginCheck.jsp", "UTF-8");
+			    SecureRandom random = new SecureRandom();
+			    String state = new BigInteger(130, random).toString();
+			    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+			    apiURL += "&client_id=" + clientId;
+			    apiURL += "&redirect_uri=" + redirectURI;
+			    apiURL += "&state=" + state;
+			    session.setAttribute("state", state);
+			 %>
+  			<a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+			<button class="clickBtn naver mouseHand" onclick="window.location.href='<%=apiURL%>'">네이버 로그인</button> 
 			
 			<button class="clickBtn google mouseHand customGPlusSignIn" id="customBtn">구글 로그인</button>
 			<div id="name"></div>
@@ -60,47 +76,7 @@
 	 		<p class="joinLink">아이디가 없으신가요?&nbsp; <a href="<%=path%>/member/userJoin.jsp"> 회원가입</a></p>	
 	 	
 	</div>
-	
-<!-- IE 호환성 Script -->
-<script type="text/javascript">
-  var xhr = null;
 
-  function getXMLHttpRequest() {
-
-  	if (window.ActiveXObject) {
-
-  		try {
-
-  			return new ActiveXObject("Msxml2.XMLHTTP");
-
-  		} catch (e) {
-
-  			try {
-
-  				return new ActiveXObject("Microsoft.XMLHTTP");
-
-  			} catch (e1) {
-
-  				return null;
-
-  			}
-
-  		}
-
-  } else if(window.XMLHttpRequest){
-
-  	return new XMLHttpRequest();
-
-  } else {
-
-  	return null;
-
-  }
-
-  }
-  
-</script>	
-<!-- // IE 호환성 Script -->
 	
 <!-- 카카오 아이디로 로그인 초기화 Script -->
 <script type='text/javascript'>
@@ -272,7 +248,7 @@ var googleUser = {};
           console.log("ID Token: " + id_token);
           
           xhr = getXMLHttpRequest();
-          xhr.open('POST', '../GoogleLoginCheck');
+          xhr.open('POST', '<%=path%>/GoogleLoginCheck');
           xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
           xhr.onreadystatechange = function() { // onreadystatechange 이벤트 핸들러를 작성함.
 
@@ -283,7 +259,7 @@ var googleUser = {};
       	        // 요청한 데이터를 문자열로 반환함.
       	        
       	    	// location.href = "../index.jsp";
-      	    	window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/index.jsp");
+      	    	window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "<%=path%>/index.jsp");
 
       	    }
 
