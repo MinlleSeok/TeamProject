@@ -59,12 +59,6 @@ public class MemberServlet extends HttpServlet {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
 	// 공통사항 처리 (포워딩)////////////////////////////////////////////////////////////////////
 	if(forward!=null){
 		if(forward.isRedirect()){

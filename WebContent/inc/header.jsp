@@ -8,7 +8,7 @@
 <header class="header">		
 	<div class="headerWrap">
 		<h1>
-			<a href="#">우리동네 반려견 커뮤니티</a>
+			<a href="#">mmProject</a>
 		</h1>
 		
 		<nav class="headLeft">
