@@ -3,7 +3,7 @@ package member;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//Action ÀÎÅÍÆäÀÌ½ºÀÇ Ãß»ó¸Ş¼Òµå¸¦ ±¸ÇöÇÑ ÀÚ½ÄÅ¬·¡½º¿¡¼­ °øÅëÀûÀ¸·Î »ç¿ëÇÒ Æ²
+//Action ì¸í„°í˜ì´ìŠ¤ì˜ ì¶”ìƒë©”ì†Œë“œë¥¼ êµ¬í˜„í•œ ìì‹í´ë˜ìŠ¤ì—ì„œ ê³µí†µì ìœ¼ë¡œ ì‚¬ìš©í•  í‹€
 public interface Action {	
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception;	
 }

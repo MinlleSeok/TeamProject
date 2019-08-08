@@ -8,16 +8,16 @@ import javax.sql.DataSource;
 
 public class MemberDAO {
 	
-//*********** getConn()»ı¼º : Ä¿³Ø¼ÇÇ®·Î ºÎÅÍ Ä¿³Ø¼Ç °´Ã¼conÀ» ¸¸µé±â À§ÇÑ ¸Ş¼Òµå. 	
-	private Connection getConn() throws Exception{
-	
-		Connection con = null;
-		Context init = new InitialContext();
+	//*********** getConn()ìƒì„± : ì»¤ë„¥ì…˜í’€ë¡œ ë¶€í„° ì»¤ë„¥ì…˜ ê°ì²´conì„ ë§Œë“¤ê¸° ìœ„í•œ ë©”ì†Œë“œ. 	
+		private Connection getConn() throws Exception{
+		
+			Connection con = null;
+			Context init = new InitialContext();
 
-		// Ä¿³Ø¼Ç Ç® ¾ò±â(context.xmlÆÄÀÏÀÇ <Resource> ÅÂ±×ÀÇ nameÁ¤º¸·Î °¡Á®¿È)
-		DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/mmpjt");
-		con = ds.getConnection();
-		return con;
-	}// getConn() Á¾·á
-	
-} //DAO Å¬·¡½º Á¾·á
+			// ì»¤ë„¥ì…˜ í’€ ì–»ê¸°(context.xmlíŒŒì¼ì˜ <Resource> íƒœê·¸ì˜ nameì •ë³´ë¡œ ê°€ì ¸ì˜´)
+			DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/mmpjt");
+			con = ds.getConnection();
+			return con;
+		}// getConn() ì¢…ë£Œ
+		
+	} //DAO í´ë˜ìŠ¤ ì¢…ë£Œ

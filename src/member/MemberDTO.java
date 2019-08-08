@@ -2,9 +2,9 @@ package member;
 
 import java.sql.Timestamp;
 
-//DTO Å¬·¡½ºÀÇ ¸ñÀû
-	//1.È¸¿ø°¡ÀÔ Á¤º¸¸¦ °¢ º¯¼ö¿¡ ÀúÀåÇÏ¿© DB¿¡ insert ¿ëµµÀÇ Å¬·¡½º
-	//2.DB·Î ºÎÅÍ È¸¿øÁ¤º¸¸¦ °Ë»öÇÑ ÈÄ °Ë»öÇÑ µ¥ÀÌÅÍ¸¦ ÀúÀåÇÒ ¿ëµµÀÇ Å¬·¡½º
+//DTO í´ëž˜ìŠ¤ì˜ ëª©ì 
+	//1.íšŒì›ê°€ìž… ì •ë³´ë¥¼ ê° ë³€ìˆ˜ì— ì €ìž¥í•˜ì—¬ DBì— insert ìš©ë„ì˜ í´ëž˜ìŠ¤
+	//2.DBë¡œ ë¶€í„° íšŒì›ì •ë³´ë¥¼ ê²€ìƒ‰í•œ í›„ ê²€ìƒ‰í•œ ë°ì´í„°ë¥¼ ì €ìž¥í•  ìš©ë„ì˜ í´ëž˜ìŠ¤
 
 public class MemberDTO {
 	

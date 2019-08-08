@@ -1,35 +1,35 @@
 package member;
 
 /*
-ActionForward Å¬·¡½º´Â Action ÀÎÅÍÆäÀÌ½º¸¦ ±¸ÇöÇÑ ÀÚ½Ä°´Ã¼ÀÇ ¸í·ÉÀ» ¼öÇàÇÏ°í
- °á°ú°ªÀ» °¡Áö°í ÆäÀÌÁö¸¦ Æ÷¿öµù(Àç¿äÃ»)ÇÒ¶§ »ç¿ëµÇ´Â Å¬·¡½ºÀÌ´Ù
-	ÇÏ´ÂÀÏ1. ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¿©ºÎ°ªÀ» ÀúÀåÈÄ ¹ÝÈ¯ÇØÁØ´Ù
-		- ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¿©ºÎ°ª true ÀÏ¶§ => response.rendredirect();¸®´ÙÀÌ·ºÆ®¹æ½Ä
-		- ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¿©ºÎ°ª falseÀÏ¶§ => forward(); µð½ºÆÐÄ¡ ¹æ½ÄÀ¸·Î Àü´Þ 		 
-	ÇÏ´ÂÀÏ2. ÀÌµ¿ÇÒ ÆäÀÌÁö °æ·Î ÁÖ¼Ò°ªÀ» ÀúÀåÇÏ¿© ¹ÝÈ¯ÇØÁÖ´Â ¿ªÇÒ.
+ActionForward í´ëž˜ìŠ¤ëŠ” Action ì¸í„°íŽ˜ì´ìŠ¤ë¥¼ êµ¬í˜„í•œ ìžì‹ê°ì²´ì˜ ëª…ë ¹ì„ ìˆ˜í–‰í•˜ê³ 
+ ê²°ê³¼ê°’ì„ ê°€ì§€ê³  íŽ˜ì´ì§€ë¥¼ í¬ì›Œë”©(ìž¬ìš”ì²­)í• ë•Œ ì‚¬ìš©ë˜ëŠ” í´ëž˜ìŠ¤ì´ë‹¤
+	í•˜ëŠ”ì¼1. íŽ˜ì´ì§€ ì´ë™ë°©ì‹ ì—¬ë¶€ê°’ì„ ì €ìž¥í›„ ë°˜í™˜í•´ì¤€ë‹¤
+		- íŽ˜ì´ì§€ ì´ë™ë°©ì‹ ì—¬ë¶€ê°’ true ì¼ë•Œ => response.rendredirect();ë¦¬ë‹¤ì´ë ‰íŠ¸ë°©ì‹
+		- íŽ˜ì´ì§€ ì´ë™ë°©ì‹ ì—¬ë¶€ê°’ falseì¼ë•Œ => forward(); ë””ìŠ¤íŒ¨ì¹˜ ë°©ì‹ìœ¼ë¡œ ì „ë‹¬ 		 
+	í•˜ëŠ”ì¼2. ì´ë™í•  íŽ˜ì´ì§€ ê²½ë¡œ ì£¼ì†Œê°’ì„ ì €ìž¥í•˜ì—¬ ë°˜í™˜í•´ì£¼ëŠ” ì—­í• .
 */
 
 public class ActionForward {
-	// ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¿©ºÎ°ªÀ» ÀúÀåÇÒ º¯¼ö
+	// íŽ˜ì´ì§€ ì´ë™ë°©ì‹ ì—¬ë¶€ê°’ì„ ì €ìž¥í•  ë³€ìˆ˜
 	private boolean isRedirect=false;	
-	// ÀÌµ¿ÇÒ ÆäÀÌÁö °æ·Î ÁÖ¼Ò°ªÀ» ÀúÀåÇÒ º¯¼ö
+	// ì´ë™í•  íŽ˜ì´ì§€ ê²½ë¡œ ì£¼ì†Œê°’ì„ ì €ìž¥í•  ë³€ìˆ˜
 	private String path=null;
 	
-	// ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¿©ºÎ°ªÀ» ÀúÀåÇÒ ¸Þ¼Òµå
+	// íŽ˜ì´ì§€ ì´ë™ë°©ì‹ ì—¬ë¶€ê°’ì„ ì €ìž¥í•  ë©”ì†Œë“œ
 	public void setRedirect(boolean isRedirect){
 		this.isRedirect=isRedirect;	}
 	
-	// ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¿©ºÎ°ªÀ» ¸®ÅÏÇØÁÖ´Â ¸Þ¼Òµå
+	// íŽ˜ì´ì§€ ì´ë™ë°©ì‹ ì—¬ë¶€ê°’ì„ ë¦¬í„´í•´ì£¼ëŠ” ë©”ì†Œë“œ
 	public boolean isRedirect(){
 		return isRedirect;	}
 	
-	// ÀÌµ¿ÇÒ ÆäÀÌÁö °æ·Î ÁÖ¼Ò°ªÀ» ¸®ÅÏÇØÁÖ´Â ¸Þ¼Òµå
+	// ì´ë™í•  íŽ˜ì´ì§€ ê²½ë¡œ ì£¼ì†Œê°’ì„ ë¦¬í„´í•´ì£¼ëŠ” ë©”ì†Œë“œ
 	public String getPath() {
 		return path;	}
 
-	// ÀÌµ¿ÇÒ ÆäÀÌÁö °æ·Î ÁÖ¼Ò°ªÀ» ÀúÀåÇÒ ¸Þ¼Òµå
+	// ì´ë™í•  íŽ˜ì´ì§€ ê²½ë¡œ ì£¼ì†Œê°’ì„ ì €ìž¥í•  ë©”ì†Œë“œ
 	public void setPath(String path) {
 		this.path = path;	}
 
-}// Å¬·¡½º Á¾·á
+}// í´ëž˜ìŠ¤ ì¢…ë£Œ
 

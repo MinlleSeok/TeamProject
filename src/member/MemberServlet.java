@@ -17,56 +17,56 @@ import org.json.simple.parser.ParseException;
 
 public class MemberServlet extends HttpServlet {
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {doProcess(request,response);System.out.println("µÎ°Ù");}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {doProcess(request,response);System.out.println("µÎÆ÷½ºÆ®");}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {doProcess(request,response);System.out.println("ï¿½Î°ï¿½");}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {doProcess(request,response);System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®");}
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("¼­ºí¸´ ÀÛµ¿");
+		System.out.println("ì„œë¸”ë¦¿ ì‘ë™");
 		
-		// ¿äÃ»ÇÑ °¡»óÁÖ¼Ò°ª ¾ò±â(ÄÁÅØ½ºÆ® ÆĞ½ºÆ÷ÇÔÁÖ¼Ò-ÄÁÅØ½ºÆ®±æÀÌ = ¼ø¼ö °æ·Î)
+		// ìš”ì²­í•œ ê°€ìƒì£¼ì†Œê°’ ì–»ê¸°(ì»¨í…ìŠ¤íŠ¸ íŒ¨ìŠ¤í¬í•¨ì£¼ì†Œ-ì»¨í…ìŠ¤íŠ¸ê¸¸ì´ = ìˆœìˆ˜ ê²½ë¡œ)
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		int contextPathLength= contextPath.length();
-		String command = RequestURI.substring(contextPathLength);// ÀüÃ¼ÁÖ¼Ò¿¡¼­ ¿äÃ»ÁÖ¼Ò¸¸ Àß¶ó³½ °á°ú
+		String command = RequestURI.substring(contextPathLength);// ì „ì²´ì£¼ì†Œì—ì„œ ìš”ì²­ì£¼ì†Œë§Œ ì˜ë¼ë‚¸ ê²°ê³¼
 		System.out.println("1:"+RequestURI);
 		System.out.println("2:"+contextPath);
 		System.out.println("3:"+contextPathLength);
-		System.out.println("commandÃÖÁ¾ÇüÅÂ:"+command);
+		System.out.println("commandìµœì¢…í˜•íƒœ:"+command);
 		
-		//doProcess Àü¿ªº¯¼ö ¼±¾ğ
+		//doProcess ì „ì—­ë³€ìˆ˜ ì„ ì–¸
 		ActionForward forward = null;
 		Action action=null;		
 		
-		// ¿äÃ»ÁÖ¼Ò(command)¿¡ µû¶ó ÀÛ¾÷ Ã³¸® ½ÃÀÛÇÏ±â
+		// ìš”ì²­ì£¼ì†Œ(command)ì— ë”°ë¼ ì‘ì—… ì²˜ë¦¬ ì‹œì‘í•˜ê¸°
 		
-// È¸¿ø°¡ÀÔ ¸ŞÀÎ ¿¬°á(userJoin.me)////////////////////////////////////////////////////////////////////
+		// íšŒì›ê°€ì… ë©”ì¸ ì—°ê²°(userJoin.me)////////////////////////////////////////////////////////////////////
 	if(command.equals("/userJoin.me")){
-		//ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¼±ÅÃ(true=¸®´ÙÀÌ·ºÆ®, false=µğ½ºÆĞÄ¡(°æ·Î ³ëÅø¾ÈÇÔ))
+		//í˜ì´ì§€ ì´ë™ë°©ì‹ ì„ íƒ(true=ë¦¬ë‹¤ì´ë ‰íŠ¸, false=ë””ìŠ¤íŒ¨ì¹˜(ê²½ë¡œ ë…¸íˆ´ì•ˆí•¨))
 		forward=new ActionForward();
 		forward.setRedirect(false);		
-		forward.setPath("./member/userJoin.jsp");  //ÀÌµ¿ÇÒ ÆäÀÌÁö °æ·Î ÁÖ¼Ò°ª ÀúÀå(È¸¿ø°¡ÀÔ ÀÔ·Â ÆäÀÌÁö)
+		forward.setPath("./member/userJoin.jsp");  //ì´ë™í•  í˜ì´ì§€ ê²½ë¡œ ì£¼ì†Œê°’ ì €ì¥(íšŒì›ê°€ì… ì…ë ¥ í˜ì´ì§€)
 		
 		
-// ¸ŞÀÎÆäÀÌÁö ¿¬°á(mm.me)////////////////////////////////////////////////////////////////////	
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(mm.me)////////////////////////////////////////////////////////////////////	
 	}else if(command.equals("/mm.me")){
-		//ÆäÀÌÁö ÀÌµ¿¹æ½Ä ¼±ÅÃ(true=¸®´ÙÀÌ·ºÆ®, false=µğ½ºÆĞÄ¡(°æ·Î ³ëÃâ¾ÈÇÔ))
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½(true=ï¿½ï¿½ï¿½ï¿½ï¿½Ì·ï¿½Æ®, false=ï¿½ï¿½ï¿½ï¿½Ä¡(ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½))
 		forward=new ActionForward();
 		forward.setRedirect(false);
 		
-		//ÀÌµ¿ÇÒ ÆäÀÌÁö °æ·Î ÁÖ¼Ò°ª ÀúÀå
+		//ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ö¼Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½
 		forward.setPath("/index.jsp");		
 
 	}
 	
 	
-	// °øÅë»çÇ× Ã³¸® (Æ÷¿öµù)////////////////////////////////////////////////////////////////////
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)////////////////////////////////////////////////////////////////////
 	if(forward!=null){
 		if(forward.isRedirect()){
 			response.sendRedirect(forward.getPath());
-		}else{//µğ½ºÆĞÄ¡ ¹æ½ÄÀ¸·Î ÆäÀÌÁö °æ·Î ³ëÃâ ¾øÀÌ Æ÷¿öµù
+		}else{//ï¿½ï¿½ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			RequestDispatcher dispatcher=request.getRequestDispatcher(forward.getPath());
 			dispatcher.forward(request, response);}
 		
-	}// °øÅë»çÇ× if Á¾·á		
-} // doProcess() Á¾·á	
-} // ¼­ºí¸´ Á¾·á
+	}// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ if ï¿½ï¿½ï¿½ï¿½		
+} // doProcess() ï¿½ï¿½ï¿½ï¿½	
+} // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½

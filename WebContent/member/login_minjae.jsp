@@ -102,6 +102,7 @@
   }
   </script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
 </head>
 <body>
@@ -136,7 +137,7 @@
 			    <p class="snsLogTit">SNS 계정으로 로그인</p>
 			</form>	 	 
 			<a href="javascript:loginWithKakao()" id="custom-login-btn" class="clickBtn kakao mouseHand">카카오 로그인</a>   
-			<button class="clickBtn naver mouseHand" >네이버 로그인</button> 
+			<button class="clickBtn naver mouseHand" id="naverIdLogin">네이버 로그인</button> 
 			
 			<button class="clickBtn google mouseHand customGPlusSignIn" id="customBtn">구글 로그인</button>
 			<div id="name"></div>
@@ -280,6 +281,24 @@ function onSignIn(googleUser) {
     };
   //]]>
 </script>
+
+<!-- 네이버아디디로로그인 초기화 Script -->
+<script type="text/javascript">
+	var naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "uKiP2ZjjUHfxjMGZTcN7",
+			callbackUrl: "http://localhost:8090/mmProject/NaverloginCheck",
+			isPopup: true, /* 팝업을 통한 연동처리 여부 */
+			loginButton: {color: "green", type: 2, height: 30} /* 로그인 버튼의 타입을 지정 */
+		}
+	);
+	
+	/* 설정정보를 초기화하고 연동을 준비 */
+	naverLogin.init();
+	
+</script>
+<!-- // 네이버아이디로로그인 초기화 Script -->
+
 <script>startApp();</script>
 </body>
 </html>
