@@ -26,6 +26,7 @@
 
 	<div class ="loginSec" >	
 		<form class="idLogin loginSec" action="#" method="post">
+		<input type="hidden">
 				<div class="loginHead">					
 			    	
 			    	<p class="loginIntro">mmProject</p>
@@ -132,6 +133,7 @@ function getXMLHttpRequest() {
               console.log(res.properties);
               
               xhr = getXMLHttpRequest();
+              xhr = new XMLHttpRequest();
               xhr.open('POST', '../KakaoLoginCheck');
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
               xhr.onreadystatechange = function() { // onreadystatechange 이벤트 핸들러를 작성함.
