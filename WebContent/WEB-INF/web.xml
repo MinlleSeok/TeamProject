@@ -40,4 +40,14 @@
   	<url-pattern>/KakaoLoginCheck</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+  	<servlet-name>NaverLogin</servlet-name>
+  	<servlet-class>member.NaverLoginCheck</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>NaverLogin</servlet-name>
+  	<url-pattern>/NaverLoginCheck</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

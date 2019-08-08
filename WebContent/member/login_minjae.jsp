@@ -57,7 +57,7 @@
 			
 			<%
 			    String clientId = "uKiP2ZjjUHfxjMGZTcN7";
-			    String redirectURI = URLEncoder.encode("http://localhost:8090/mmProject/NaverloginCheck.jsp", "UTF-8");
+			    String redirectURI = URLEncoder.encode("http://localhost:8090/mmProject/NaverLoginCheck", "UTF-8");
 			    SecureRandom random = new SecureRandom();
 			    String state = new BigInteger(130, random).toString();
 			    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
@@ -66,7 +66,7 @@
 			    apiURL += "&state=" + state;
 			    session.setAttribute("state", state);
 			 %>
-  			<a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+  			
 			<button class="clickBtn naver mouseHand" onclick="window.location.href='<%=apiURL%>'">네이버 로그인</button> 
 			
 			<button class="clickBtn google mouseHand customGPlusSignIn" id="customBtn">구글 로그인</button>
@@ -174,7 +174,7 @@ function getXMLHttpRequest() {
 	var naverLogin = new naver.LoginWithNaverId(
 		{
 			clientId: "uKiP2ZjjUHfxjMGZTcN7",
-			callbackUrl: "http://localhost:8090/mmProject/NaverloginCheck.jsp",
+			callbackUrl: "http://localhost:8090/mmProject/NaverLoginCheck.jsp",
 			isPopup: true, /* 팝업을 통한 연동처리 여부 */
 			loginButton: {color: "green", type: 2, height: 30} /* 로그인 버튼의 타입을 지정 */
 		}
