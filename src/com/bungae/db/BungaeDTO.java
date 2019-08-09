@@ -1,8 +1,8 @@
-package com.bungae.beans;
+package com.bungae.db;
 
 import java.sql.Date;
 
-public class Bungae {
+public class BungaeDTO {
 	private int num;
 	private int mmNum;
 	private String subject;
