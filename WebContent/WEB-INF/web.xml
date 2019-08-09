@@ -21,6 +21,16 @@
   </servlet-mapping>
   
   <servlet>
+  	<servlet-name>BungaeServlet</servlet-name>
+  	<servlet-class>com.bungae.controller.BungaeFrontController</servlet-class>
+  </servlet>    
+  
+  <servlet-mapping>
+ 	<servlet-name>BungaeServlet</servlet-name>
+  	<url-pattern>*.bg</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
   	<servlet-name>GoogleLogin</servlet-name>
   	<servlet-class>member.GoogleLoginCheck</servlet-class>
   </servlet>
