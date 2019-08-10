@@ -46,8 +46,13 @@ public class BungaeDAO {
 			
 			try {
 				con = getConn();
-				sql = "insert into member(mmNum, subject, content, max, bdate) values(?,?,?,?,?)";
+				sql = "insert into bungae(mmNum, subject, content, max, bdate) values(?,?,?,?,?)";
 				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, bean.getMmNum());
+				pstmt.setString(2, bean.getSubject());
+				pstmt.setString(3, bean.getContent());
+				pstmt.setInt(4, bean.getMax());
+				pstmt.setDate(5, bean.getBdate());
 				int success = pstmt.executeUpdate();
 				if(success > 0) {
 					check = true;
@@ -64,12 +69,12 @@ public class BungaeDAO {
 		}
 
 		public ArrayList<BungaeDTO> selectBungae(int mmNum) {
-			ArrayList<BungaeDTO> list = null;
+			ArrayList<BungaeDTO> list = new ArrayList<BungaeDTO>();
 			BungaeDTO bdto = null;
 			
 			try {
 				con = getConn();
-				sql = "select * from bungae";
+				sql = "select * from bungae where mmNum="+mmNum+" order by num desc limit 5";
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 				

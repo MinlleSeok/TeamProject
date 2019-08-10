@@ -1,5 +1,8 @@
 package com.bungae.controller;
 
+import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,18 +19,34 @@ import com.bungae.db.BungaeDAO;
 
 public class BungaeInsertAction implements Action {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		String jsonStr = request.getParameter("x");
+		System.out.println(jsonStr);
 		
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObj = (JSONObject)parser.parse(jsonStr);
-		String bungaeName = (String)jsonObj.get("bungaeName");
+		System.out.println(jsonObj);
+		
+		System.out.println(URLDecoder.decode(jsonObj.get("bungaeName").toString(),"UTF-8"));
+		System.out.println(jsonObj.get("bungaeName").toString());
+		
+		System.out.println((String)jsonObj.get("bungaeName"));
+		
+		
+		String bungaeName = jsonObj.get("bungaeName").toString();
 		String bungaeRef = (String)jsonObj.get("bungaeRef");
-		String bungaeDate = (String)jsonObj.get("ungaeDate");
+		Date bungaeDate = Date.valueOf((String) jsonObj.get("bungaeDate"));
+		//SimpleDateFormat date = new SimpleDateFormat();
+		//Date date2 = (Date) date.parseObject(bungaeDate);  
 		String bungaeMax = (String)jsonObj.get("bungaeMax");
+		
 		
 		BungaeDAO bdao = new BungaeDAO();
 		BungaeDTO bdto = new BungaeDTO();
@@ -36,33 +55,21 @@ public class BungaeInsertAction implements Action {
 		bdto.setSubject(bungaeName);
 		bdto.setMmNum(1);
 		bdto.setContent(bungaeRef);
+		bdto.setBdate(bungaeDate);
 		bdto.setMax(Integer.parseInt(bungaeMax));
 		
 		
 		boolean result = bdao.insertBungae(bdto);
 		if(result == true){
-			ArrayList<BungaeDTO> bungaeList = bdao.selectBungae(1);
 			
-			JSONObject obj = new JSONObject();
-				JSONArray jArray = new JSONArray();//배열이 필요할때
-				for (int i = 0; i < bungaeList.size(); i++)//배열
-				{
-				JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
-				sObject.put("bungaeName", bungaeList.get(i).getSubject());
-				sObject.put("bungaeRef", bungaeList.get(i).getContent());
-				sObject.put("bungaeDate", bungaeList.get(i).getBdate());
-				sObject.put("bungaeMax", bungaeList.get(i).getMax());
-				jArray.add(sObject);
-				}
-				obj.put("item", jArray);//배열을 넣음
-	
-				System.out.println(obj.toString());
-
+				
+				forward.setRedirect(false);
+				forward.setPath("#");
 
 			
 		}
 		
-		return null;
+		return forward;
 	}
 
 }
