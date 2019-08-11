@@ -32,7 +32,6 @@ public class MemberServlet extends HttpServlet {
 		System.out.println("2:"+contextPath);
 		System.out.println("3:"+contextPathLength);
 		System.out.println("command최종형태:"+command);
-		
 		//doProcess 전역변수 선언
 		ActionForward forward = null;
 		Action action=null;		
@@ -47,26 +46,39 @@ public class MemberServlet extends HttpServlet {
 		forward.setPath("./member/userJoin.jsp");  //이동할 페이지 경로 주소값 저장(회원가입 입력 페이지)
 		
 		
-// ���������� ����(mm.me)////////////////////////////////////////////////////////////////////	
-	}else if(command.equals("/mm.me")){
-		//������ �̵���� ����(true=�����̷�Ʈ, false=����ġ(��� �������))
+	}else if(command.equals("/member/mm.me")){
+		System.out.println("mm.me 들어옴");
 		forward=new ActionForward();
 		forward.setRedirect(false);
 		
-		//�̵��� ������ ��� �ּҰ� ����
-		forward.setPath("/index.jsp");		
+		forward.setPath("../index.jsp");		
 
+	}else if(command.equals("/login.me")){
+		forward=new ActionForward();
+		forward.setRedirect(false);
+		//이동할 페이지 경로 주소값 저장
+		forward.setPath("./member/login.jsp");
+		
+		
+	}else if(command.equals("/member/snsIdChkAction.me")){
+		action=new snsIdChkAction();
+		
+		try {
+			forward=action.execute(request, response);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	
-	// ������� ó�� (������)////////////////////////////////////////////////////////////////////
+	
 	if(forward!=null){
 		if(forward.isRedirect()){
 			response.sendRedirect(forward.getPath());
-		}else{//����ġ ������� ������ ��� ���� ���� ������
+		}else{
 			RequestDispatcher dispatcher=request.getRequestDispatcher(forward.getPath());
 			dispatcher.forward(request, response);}
 		
-	}// ������� if ����		
-} // doProcess() ����	
-} // ���� ����
+	}		
+} 
+} 

@@ -22,7 +22,7 @@
 	<div class ="loginSec" >	
 		<form class="idLogin loginSec" action="#" method="post">
 				<div class="loginHead">					
-			    	
+			    	....................
 			    	<p class="loginIntro">mmProject</p>
 			  	</div>
 			
@@ -48,7 +48,7 @@
 			    <p class="snsLogTit">SNS 계정으로 로그인</p>
 			</form>	 	 
 			<a  href="javascript:loginWithKakao()"  class="clickBtn kakao mouseHand">카카오 로그인</a>   
-			<button class="clickBtn naver mouseHand" >네이버 로그인</button> 
+			<jsp:include page="../inc/naver.jsp"/>	 
 			<button class="clickBtn google mouseHand" >구글 로그인</button>
 			 	 
 			<p class="copyR">&copy; mmProject :: since 2019</p>			
