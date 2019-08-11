@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import javax.naming.*;
 import javax.sql.DataSource;
 
+import com.member.db.MemberDAO;
+import com.member.db.MemberDTO;
+
 public class BungaeDAO {
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -97,6 +100,123 @@ public class BungaeDAO {
 			}
 			
 			return list;
+		}
+
+		public ArrayList<BungaeDTO> selectBungae(int mmNum, int idx) {
+			ArrayList<BungaeDTO> list = new ArrayList<BungaeDTO>();
+			BungaeDTO bdto = null;
+			
+			try {
+				con = getConn();
+				sql = "select * from bungae where mmNum="+mmNum+" order by num desc limit "+idx+", 3";
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					bdto = new BungaeDTO();
+					bdto.setBdate(rs.getDate("bdate"));
+					bdto.setContent(rs.getString("content"));
+					bdto.setMax(rs.getInt("max"));
+					bdto.setMmNum(rs.getInt("mmNum"));
+					bdto.setNum(rs.getInt("num"));
+					bdto.setSubject(rs.getString("subject"));
+					list.add(bdto);
+				}
+				
+				close();
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return list;
+		}
+		
+		public ArrayList<BungaeUserDTO> selectBungaeUser(int mmNum, int bgNum) {
+			ArrayList<BungaeUserDTO> list = new ArrayList<BungaeUserDTO>();
+			BungaeUserDTO budto = null;
+			
+			try {
+				con = getConn();
+				sql = "select * from bungaeUser where mmNum="+mmNum+" and bgNum="+bgNum;
+				pstmt = con.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()){
+					budto = new BungaeUserDTO();
+					budto.setBgNum(rs.getInt("bgNum"));
+					budto.setNum(rs.getInt("num"));
+					budto.setMmNum(rs.getInt("mmNum"));
+					budto.setUserName(rs.getString("userName"));
+					budto.setUserPhoto(rs.getString("userPhoto"));
+					list.add(budto);
+				}
+				
+				close();
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return list;
+		}
+		
+		public int join(int mmNum, int bgNum, String id) {
+			int check = 0;
+			BungaeUserDTO budto = null;
+			MemberDTO mdto = null;
+			
+			try {
+				con = getConn();
+				
+				MemberDAO mdao = new MemberDAO();
+				
+				mdto = mdao.selectMember(id);
+				
+				sql = "insert into bungaeUser(mmNum, bgNum, userName, userPhoto) values(?,?,?,?)";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, mmNum);
+				pstmt.setInt(2, bgNum);
+				pstmt.setString(3, mdto.getUserId());
+				pstmt.setString(4, mdto.getUserPhoto());
+				check = pstmt.executeUpdate();
+				System.out.println("join"+check);
+				close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return check;
+			
+		}
+
+		public int out(int mmNum, int bgNum, String id) {
+			int check = 0;
+			BungaeUserDTO budto = null;
+			MemberDTO mdto = null;
+			
+			try {
+				con = getConn();
+				
+				MemberDAO mdao = new MemberDAO();
+				
+				mdto = mdao.selectMember(id);
+				
+				sql = "delete from bungaeUser where mmNum=? and bgNum=? and userName=?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setInt(1, mmNum);
+				pstmt.setInt(2, bgNum);
+				pstmt.setString(3, id);
+				check = pstmt.executeUpdate();
+				System.out.println("out"+check);
+				close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			return check;
 		}
 
 		

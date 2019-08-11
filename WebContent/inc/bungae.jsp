@@ -2,71 +2,10 @@
 	pageEncoding="UTF-8"%>
 	<!DOCTYPE html>
 <% String path = request.getContextPath(); %>
+<% String id = "test"; 
+	String mmNum = "1";%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<style>
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
 
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-</style>
 <div>
 	<div id="bungaeButton">
 		<input type="button" name="bungae" id="bungae" value="번개개설" onclick="bungaeInsertToggle()">
@@ -74,7 +13,7 @@ input:checked + .slider:before {
 	<div id="bungaeInsert" style="display:none;">
 		<ul>
 			<li><input type="text" name="bungaeName" id="bungaeName" placeholder="번개명"></li>
-			<li><p id="bungaeNameP"></p></li>
+			<li style="display:none;"><p id="bungaeNameP"></p></li>
 			<li><input type="text" name="bungaeRef" id="bungaeRef" placeholder="번개 간략 설명"></li>
 			<li><input type="date" name="bungaeDate" id="bungaeDate"> </li>
 			<li>
@@ -109,10 +48,10 @@ input:checked + .slider:before {
 	
 	function bungaeInsert() {
 		
-		var bungaeName = document.getElementById('bungaeName').value;
-		var bungaeRef = document.getElementById('bungaeRef').value;
-		var bungaeDate = document.getElementById('bungaeDate').value;
-		var bungaeMax = document.getElementById('bungaeMax').value;
+		var bungaeName = document.getElementById("bungaeName").value;
+		var bungaeRef = document.getElementById("bungaeRef").value;
+		var bungaeDate = document.getElementById("bungaeDate").value;
+		var bungaeMax = document.getElementById("bungaeMax").value;
 		
 		if(bungaeName.length == 0) {
 			return;
@@ -142,18 +81,18 @@ input:checked + .slider:before {
 		xhttp.onreadystatechange = function() {
 			if(this.readyState == 4 && this.status == 200) {
 				
-				printaa("1");
+				printBungaeList(<%=mmNum%>);
 				
 				
 				
 			}
 		};
-		xhttp.open("POST", "<%=path%>/insert.bg?t="+ new Date(), true);
+		xhttp.open("POST", "<%=path%>/insert.bg?t="+ new Date(), false);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 		xhttp.send("x="+dbParam);
 	}
 	
-	function printaa(data){
+	function printBungaeList(mmNum){
 		
 		var xhttp;
 		
@@ -169,36 +108,167 @@ input:checked + .slider:before {
 				
 				var objj = JSON.parse(this.responseText);
 				var list = document.getElementById("bungaeList");
-				list.innerHTML = '';
+				list.innerHTML = "";
 				var y;
 				for (y = 0; y < objj.item.length; y++){
 					
-					list.innerHTML += '<ul id="list'+objj.item[y].bungaeNum+'">';
-					list.innerHTML += '<li>번개참가<label class="switch"><input type="checkbox" id="bungaeJoin'+objj.item[y].bungaeNum+'" onsubmit="bungaeJoin('+objj.item[y].bungaeNum+')"><span class="slider round"></span></label></li>';
-					list.innerHTML += '<li>'+objj.item[y].bungaeName+'</li>';
-					list.innerHTML += '<li>'+objj.item[y].bungaeRef+'</li>';
-					list.innerHTML += '<li>'+objj.item[y].bungaeDate+'</li>';
-					list.innerHTML += '<li>'+objj.item[y].bungaeMax+'</li>';
-					list.innerHTML += '</ul>';
+					list.innerHTML += "<ul class='bungae' id='"+objj.item[y].bungaeNum+"'>"
+								+ "<li id='listc"+objj.item[y].bungaeNum+"'><input type='checkbox' id='bungaeJoin"+objj.item[y].bungaeNum+"' onclick='bungaeJoin("+objj.item[y].bungaeNum+")' value='번개참가'></li>"
+								+ "<li>"+objj.item[y].bungaeName+"</li>"
+								+ "<li>"+objj.item[y].bungaeRef+"</li>"
+								+ "<li>"+objj.item[y].bungaeDate+"</li>"
+								+ "<li><span id='lista"+objj.item[y].bungaeNum+"'></span> / "+objj.item[y].bungaeMax+"</li>"
+								+ "<li id='listb"+objj.item[y].bungaeNum+"'></li>"
+								+ "</ul>";
+					printBungaeUser(mmNum, objj.item[y].bungaeNum);
 				}
 
 			}
 		};
-		xhttp.open("POST", "<%=path%>/list.bg?t="+ new Date(), true);
+		xhttp.open("POST", "<%=path%>/list.bg?t="+ new Date(), false);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
-		xhttp.send("x="+data);
+		xhttp.send("mmNum="+mmNum);
 		
 		
 	}
 	
-	function bungaeJoin(data){
-		var bj = document.getElementById('bungaeJoin'+data);
+	function bungaeJoin(bgNum){
+		var bj = document.getElementById("bungaeJoin"+bgNum);
+		
+		// var aa = document.querySelectorAll("#bungaeJoin"+data+":checked");
 	
-		if(bg.checked == true) {
-			document.getElementById('list'+data).innerHTML += 'ㅋㄷ';
+		if(bj.checked == true) {
+			
+			// document.getElementById("list"+data).innerHTML = "<img src='../images/sliderdog1.jpg' width='50px' height='50px'>";
+			
+			var xhttp;
+			
+			if (window.XMLHttpRequest) {
+				xhttp = new XMLHttpRequest();
+			} else {
+				xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			
+			var userId = "<%=id%>";
+			var mmNum = "<%=mmNum%>";
+			xhttp.onreadystatechange = function() {
+				if(this.readyState == 4 && this.status == 200) {
+					
+					printBungaeUser(mmNum, bgNum);
+					
+				}
+			};
+			xhttp.open("POST", "<%=path%>/join.bg?t="+ new Date(), false);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+			xhttp.send("id="+userId+"&mmNum="+mmNum+"&bgNum="+bgNum);
+			
 		} else {
-			bg.disabled = false;
+			
+			var xhttp;
+			
+			if (window.XMLHttpRequest) {
+				xhttp = new XMLHttpRequest();
+			} else {
+				xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			
+			var userId = "<%=id%>";
+			var mmNum = "<%=mmNum%>";
+			xhttp.onreadystatechange = function() {
+				if(this.readyState == 4 && this.status == 200) {
+					
+					printBungaeUser(mmNum, bgNum);
+					
+				}
+			};
+			xhttp.open("POST", "<%=path%>/out.bg?t="+ new Date(), false);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+			xhttp.send("id="+userId+"&mmNum="+mmNum+"&bgNum="+bgNum);
 		}
+
+	}
+	
+	function printBungaeUser(mmNum, bgNum){
+		
+		var xhttp;
+		
+		if (window.XMLHttpRequest) {
+			xhttp = new XMLHttpRequest();
+		} else {
+			xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		
+		
+		xhttp.onreadystatechange = function() {
+			if(this.readyState == 4 && this.status == 200) {
+				
+				var objj = JSON.parse(this.responseText);
+				var lista = document.getElementById("lista"+bgNum);
+				var listb = document.getElementById("listb"+bgNum);
+				var listc = document.getElementById("listc"+bgNum);
+				lista.innerHTML = objj.item.length;
+				listb.innerHTML = "";
+				var y;
+				for (y = 0; y < objj.item.length; y++){
+					
+					listb.innerHTML += "<span>"
+								+ "<img src='"+objj.item[y].userPhoto+"' width='50px' height='50px'>"
+								+ "<span>";
+				
+								var checkName = objj.item[y].userName;
+								var userId = "<%=id%>";
+								
+								if (userId === checkName) {
+									listc.innerHTML = "<input type='checkbox' id='bungaeJoin"+bgNum+"' onclick='bungaeJoin("+bgNum+")' value='번개참가' checked>";
+								}
+				
+				}
+				
+			}
+		};
+		xhttp.open("POST", "<%=path%>/user.bg?t="+ new Date(), false);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
+		xhttp.send("mmNum="+mmNum+"&bgNum="+bgNum);
+		
+		
 	}
 </script>
-<script type="text/javascript">printaa("1")</script>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+var timer;
+$(window).scroll(function(){
+    var scrolltop = parseInt ( $(window).scrollTop() );
+    if( scrolltop >= $(document).height() - $(window).height()){
+ 
+        if( !timer ){
+             
+      //추가할 내용 1
+      //실행되고 설정된시간(1000)후에 재실행된다. 1000초이내 중복실행 방지
+         
+      timer = setTimeout(function() {
+        timer = null;
+ 
+        //추가할 내용 2
+        //설정된 시간(1000) 후에 실행됨
+ 		lastPostFunc();
+      }, 1000);
+      //시간은 150~ 으로 알맞은 시간을 찾아야함
+        }
+    }
+});
+
+function lastPostFunc(){
+	
+	$.post( "<%=path%>/more.bg?t="+ new Date(),
+			{idx: $(".bungae:last").attr("id"),
+			mmNum: <%=mmNum%>}
+			}
+			function(data){
+				if(data != "") {
+					$(".bungae:last").after(data);
+				}
+			})
+	
+}
+</script>
+<script type="text/javascript">printBungaeList(<%=mmNum%>)</script>

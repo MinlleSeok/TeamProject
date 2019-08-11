@@ -97,6 +97,70 @@ public class BungaeFrontController extends HttpServlet {
 
 		}
 
+		// 번개 참여
+		// 연결(join.bg)////////////////////////////////////////////////////////////////////
+		if (command.equals("/join.bg")) {
+			// 페이지 이동방식 선택(true=리다이렉트, false=디스패치(경로 노툴안함))
+			action = new BungaeJoinAction();
+
+			try {
+				forward = action.execute(request, response);
+				return;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+		// 번개 참여철회
+		// 연결(out.bg)////////////////////////////////////////////////////////////////////
+		if (command.equals("/out.bg")) {
+			// 페이지 이동방식 선택(true=리다이렉트, false=디스패치(경로 노툴안함))
+			action = new BungaeOutAction();
+
+			try {
+				forward = action.execute(request, response);
+				return;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+		// 번개 참여유저 갱신
+		// 연결(user.bg)////////////////////////////////////////////////////////////////////
+		if (command.equals("/user.bg")) {
+			// 페이지 이동방식 선택(true=리다이렉트, false=디스패치(경로 노툴안함))
+			action = new BungaeUserAction();
+
+			try {
+				forward = action.execute(request, response);
+				return;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+		// 번개 참여유저 갱신
+		// 연결(user.bg)////////////////////////////////////////////////////////////////////
+		if (command.equals("/more.bg")) {
+			// 페이지 이동방식 선택(true=리다이렉트, false=디스패치(경로 노툴안함))
+			action = new BungaeMoreAction();
+
+			try {
+				forward = action.execute(request, response);
+				return;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		
 		// 공통사항 처리
 		// (포워딩)////////////////////////////////////////////////////////////////////
 		if (forward != null) {

@@ -14,16 +14,18 @@ import com.action.ActionForward;
 import com.bungae.db.BungaeDAO;
 import com.bungae.db.BungaeDTO;
 
-public class BungaeListAction implements Action {
+public class BungaeMoreAction implements Action {
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		String mmNum2 = request.getParameter("mmNum");
+		String idx2 = request.getParameter("idx");
 		int mmNum = Integer.parseInt(mmNum2);
+		int idx = Integer.parseInt(idx2);
 		BungaeDAO bdao = new BungaeDAO();
-		ArrayList<BungaeDTO> bungaeList = bdao.selectBungae(mmNum);
+		ArrayList<BungaeDTO> bungaeList = bdao.selectBungae(mmNum,idx);
 		
 		JSONObject obj = new JSONObject();
 			JSONArray jArray = new JSONArray();//배열이 필요할때
