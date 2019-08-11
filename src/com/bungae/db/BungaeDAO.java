@@ -108,7 +108,7 @@ public class BungaeDAO {
 			
 			try {
 				con = getConn();
-				sql = "select * from bungae where mmNum="+mmNum+" order by num desc limit "+idx+", 3";
+				sql = "select * from bungae where mmNum="+mmNum+" and num="+(idx-1);
 				pstmt = con.prepareStatement(sql);
 				rs = pstmt.executeQuery();
 				

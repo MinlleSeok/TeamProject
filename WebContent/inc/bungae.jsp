@@ -206,7 +206,12 @@
 				var lista = document.getElementById("lista"+bgNum);
 				var listb = document.getElementById("listb"+bgNum);
 				var listc = document.getElementById("listc"+bgNum);
-				lista.innerHTML = objj.item.length;
+				if(objj.item == null) {
+					lista.innerHTML = "0";
+				} else {
+					lista.innerHTML = objj.item.length;
+				}
+				
 				listb.innerHTML = "";
 				var y;
 				for (y = 0; y < objj.item.length; y++){
@@ -226,7 +231,7 @@
 				
 			}
 		};
-		xhttp.open("POST", "<%=path%>/user.bg?t="+ new Date(), false);
+		xhttp.open("POST", "<%=path%>/user.bg?t="+ new Date(), true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 		xhttp.send("mmNum="+mmNum+"&bgNum="+bgNum);
 		
@@ -240,7 +245,7 @@ $(window).scroll(function(){
     var scrolltop = parseInt ( $(window).scrollTop() );
     if( scrolltop >= $(document).height() - $(window).height()){
  
-        if( !timer ){
+        if( !timer && $(".bungae:last").attr("id") > 1){
              
       //추가할 내용 1
       //실행되고 설정된시간(1000)후에 재실행된다. 1000초이내 중복실행 방지
@@ -251,7 +256,7 @@ $(window).scroll(function(){
         //추가할 내용 2
         //설정된 시간(1000) 후에 실행됨
  		lastPostFunc();
-      }, 1000);
+      }, 200);
       //시간은 150~ 으로 알맞은 시간을 찾아야함
         }
     }
@@ -261,11 +266,32 @@ function lastPostFunc(){
 	
 	$.post( "<%=path%>/more.bg?t="+ new Date(),
 			{idx: $(".bungae:last").attr("id"),
-			mmNum: <%=mmNum%>}
-			}
+			mmNum: <%=mmNum%>},
+			
 			function(data){
 				if(data != "") {
-					$(".bungae:last").after(data);
+					
+					var objj = JSON.parse(data);
+					// alert(data);
+					//var list = document.getElementById("bungaeList");
+					var data2 = "";
+					var mmNum = "<%=mmNum%>";
+					var y;
+					
+					for (y = 0; y < objj.item.length; y++){
+						
+								data2 += "<ul class='bungae' id='"+objj.item[y].bungaeNum+"'>"
+									+ "<li id='listc"+objj.item[y].bungaeNum+"'><input type='checkbox' id='bungaeJoin"+objj.item[y].bungaeNum+"' onclick='bungaeJoin("+objj.item[y].bungaeNum+")' value='번개참가'></li>"
+									+ "<li>"+objj.item[y].bungaeName+"</li>"
+									+ "<li>"+objj.item[y].bungaeRef+"</li>"
+									+ "<li>"+objj.item[y].bungaeDate+"</li>"
+									+ "<li><span id='lista"+objj.item[y].bungaeNum+"'></span> / "+objj.item[y].bungaeMax+"</li>"
+									+ "<li id='listb"+objj.item[y].bungaeNum+"'></li>"
+									+ "</ul>";
+						printBungaeUser(mmNum, objj.item[y].bungaeNum);
+					}
+					
+					$(".bungae:last").after(data2);
 				}
 			})
 	

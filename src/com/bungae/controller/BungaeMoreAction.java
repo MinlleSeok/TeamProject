@@ -24,6 +24,10 @@ public class BungaeMoreAction implements Action {
 		String idx2 = request.getParameter("idx");
 		int mmNum = Integer.parseInt(mmNum2);
 		int idx = Integer.parseInt(idx2);
+		
+		System.out.println(mmNum);
+		System.out.println(idx);
+		
 		BungaeDAO bdao = new BungaeDAO();
 		ArrayList<BungaeDTO> bungaeList = bdao.selectBungae(mmNum,idx);
 		
