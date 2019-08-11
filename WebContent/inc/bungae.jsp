@@ -87,7 +87,7 @@
 				
 			}
 		};
-		xhttp.open("POST", "<%=path%>/insert.bg?t="+ new Date(), false);
+		xhttp.open("POST", "<%=path%>/insert.bg?t="+ new Date(), true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 		xhttp.send("x="+dbParam);
 	}
@@ -125,7 +125,7 @@
 
 			}
 		};
-		xhttp.open("POST", "<%=path%>/list.bg?t="+ new Date(), false);
+		xhttp.open("POST", "<%=path%>/list.bg?t="+ new Date(), true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 		xhttp.send("mmNum="+mmNum);
 		
@@ -158,7 +158,7 @@
 					
 				}
 			};
-			xhttp.open("POST", "<%=path%>/join.bg?t="+ new Date(), false);
+			xhttp.open("POST", "<%=path%>/join.bg?t="+ new Date(), true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 			xhttp.send("id="+userId+"&mmNum="+mmNum+"&bgNum="+bgNum);
 			
@@ -181,7 +181,7 @@
 					
 				}
 			};
-			xhttp.open("POST", "<%=path%>/out.bg?t="+ new Date(), false);
+			xhttp.open("POST", "<%=path%>/out.bg?t="+ new Date(), true);
 			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 			xhttp.send("id="+userId+"&mmNum="+mmNum+"&bgNum="+bgNum);
 		}
@@ -210,7 +210,7 @@
 					lista.innerHTML = "0";
 				} else {
 					lista.innerHTML = objj.item.length;
-				}
+				
 				
 				listb.innerHTML = "";
 				var y;
@@ -228,7 +228,7 @@
 								}
 				
 				}
-				
+				}
 			}
 		};
 		xhttp.open("POST", "<%=path%>/user.bg?t="+ new Date(), true);
