@@ -38,7 +38,7 @@
 				<!-- <a>전체보기</a> -->
 		</div>
 		<div class="mySomoim">
-			<a href=""> 제목제목제목제목 제목제목제목제목</a>
+			<a href="moimContent.jsp"> 제목제목제목제목 제목제목제목제목</a>
 			<span>닉네임일곱자리</span>
 			<span>모임 부가설명 30자 까지 모임 부가설명 30자 까지 모임 부가설명 30자 까지</span>	
 			<span>회원수 : 18/20</span>	

@@ -149,7 +149,10 @@ body{background: #f7f7f7}
 .divImg3 img{align:top;}
 
 
-
+/* 모임 시간 위치 인원 아이콘 */
+.positionIcon{display:inline-block; width:15px; height:17px; background:url(/mmProject/images/icons.png)  no-repeat -295px -80px;}
+.clockIcon{display:inline-block; width:15px; height:17px; background:url(/mmProject/images/icons.png) no-repeat -295px -103px;}
+.personIcon{display:inline-block; width:15px; height:17px; background:url(/mmProject/images/icons.png)  no-repeat -295px -123px;}
 
 
 
