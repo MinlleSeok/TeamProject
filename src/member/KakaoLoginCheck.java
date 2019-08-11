@@ -25,11 +25,15 @@ public class KakaoLoginCheck extends HttpServlet {
 
 	protected void doHandle(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String userId = req.getParameter("idtoken");
+		String userNickname = req.getParameter("nicknametoken");
 		
 		String subId = userId.substring(0, 7);
 		  // Use or store profile information
 		  // ...
+		
 		  System.out.println(userId);
+		  System.out.println(subId);
+		  System.out.println(userNickname);
 		  /*MemberDAO dao = new MemberDAO();
 		  if(dao.idCheck(subId) == 0) {
 			  MemberDTO memberBean = new MemberDTO();

@@ -79,9 +79,14 @@
 	</div>
 
 	
+	
+	
+	
 <!-- 카카오 아이디로 로그인 초기화 Script -->
 <script type='text/javascript'>
 var xhr = null;
+var test = "test 입니다";  
+
 
 function getXMLHttpRequest() {
 
@@ -124,13 +129,27 @@ function getXMLHttpRequest() {
       Kakao.Auth.login({
         success: function(authObj) {
           alert(JSON.stringify(authObj));
+
        // 로그인 성공시, API를 호출합니다.
           Kakao.API.request({
             url: '/v2/user/me',
             success: function(res) {
-              alert(JSON.stringify(res));
+                console.log(JSON.stringify(res));
+                alert(JSON.stringify(res));
+              console.log(test);
+
               console.log(res);
               console.log(res.properties);
+              
+              
+              console.log(test);
+              console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
+              console.log(res.kaccount_email);//<---- 콘솔 로그에 email 정보 출력 
+              //console.log(res.profile_image);
+              console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
+              // res.properties.nickname으로도 접근 가능 )
+              //console.log(res.created);
+              //console.log(res.status);
               
               xhr = getXMLHttpRequest();
               xhr = new XMLHttpRequest();
@@ -153,7 +172,13 @@ function getXMLHttpRequest() {
                 console.log('Signed in as: ' + xhr.responseText);
                 location.href= "../index.jsp";
               };*/
-              xhr.send('idtoken=' + res.id);
+                xhr.send('idtoken=' + res.id);
+                xhr.send('nicknametoken=' + res.properties['nickname']);
+               /* 
+               https://developers.kakao.com/docs/restapi/tool
+            	   https://antdev.tistory.com/37
+            		   https://okky.kr/article/465143
+               */
             },
             fail: function(error) {
               alert(JSON.stringify(error));
@@ -168,6 +193,15 @@ function getXMLHttpRequest() {
   //]]>
 </script>
 <!-- // 카카오 아이디로 로그인 초기화 Script -->
+
+
+
+
+
+
+
+
+
 
 <!-- 네이버 아이디로 로그인 초기화 Script -->
 <script type="text/javascript">
