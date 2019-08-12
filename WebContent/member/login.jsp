@@ -85,7 +85,7 @@
 <!-- 카카오 아이디로 로그인 초기화 Script -->
 <script type='text/javascript'>
 var xhr = null;
-var test = "test 입니다";  
+// var test = "test 입니다";  
 
 
 function getXMLHttpRequest() {
@@ -128,57 +128,97 @@ function getXMLHttpRequest() {
       // 로그인 창을 띄웁니다.
       Kakao.Auth.login({
         success: function(authObj) {
-          alert(JSON.stringify(authObj));
+//           alert(JSON.stringify(authObj));
 
        // 로그인 성공시, API를 호출합니다.
           Kakao.API.request({
             url: '/v2/user/me',
             success: function(res) {
-                console.log(JSON.stringify(res));
-                alert(JSON.stringify(res));
-              console.log(test);
+//                 console.log(JSON.stringify(res));
+//                 alert(JSON.stringify(res));
+//                 alert(JSON.stringify(res.id));
+//                 alert(JSON.stringify(res.properties['nickname']));
 
-              console.log(res);
-              console.log(res.properties);
+//                 if(JSON.stringify(res.kakao_account['has_email'])) {
+// 	                alert(JSON.stringify(res.kakao_account['email']));
+// 				}
+              
+				
+// 			alert(JSON.stringify(res.properties.thumbnail_image));
+// 			alert(JSON.stringify(res.properties.profile_image));
+//               console.log(res);
+//               console.log(res.properties);
               
               
-              console.log(test);
-              console.log(res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
-              console.log(res.kaccount_email);//<---- 콘솔 로그에 email 정보 출력 
-              //console.log(res.profile_image);
-              console.log(res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
-              // res.properties.nickname으로도 접근 가능 )
-              //console.log(res.created);
-              //console.log(res.status);
+//               console.log("-----");
+//               console.log("id : " + res.id);//<---- 콘솔 로그에 id 정보 출력(id는 res안에 있기 때문에  res.id 로 불러온다)
+//               console.log(JSON.stringify(res.properties.profile_image));
+//               console.log("nickname : " + res.properties['nickname']);//<---- 콘솔 로그에 닉네임 출력(properties에 있는 nickname 접근 
+//               console.log(res.properties['profile_image']);
               
-              xhr = getXMLHttpRequest();
+//                               alert("멈추기");
+                              
+                              Kakao.API.request({ 
+                            	  url :'/v1/api/talk/profile',
+                              
+                               success: function(res1) {
+                             
+//                                    console.log(JSON.stringify(res1.profileImageURL));
+//                                    alert(JSON.stringify(res1.profileImageURL));
+                              
+                              
+                              xhr = getXMLHttpRequest();
+                              xhr = new XMLHttpRequest();
+                              xhr.open('POST', '../KakaoLoginCheck');
+                              xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                              xhr.onreadystatechange = function() { // onreadystatechange 이벤트 핸들러를 작성함.
+
+                            	    // 서버상에 문서가 존재하고 요청한 데이터의 처리가 완료되어 응답할 준비가 완료되었을 때
+                            	    if(this.status == 200 && this.readyState == this.DONE) {
+
+                            	        // 요청한 데이터를 문자열로 반환함.
+                            	    	location.href= "../index.jsp";         
+
+                            	    } 
+
+                            	};
+                              /*xhr.onload = function() {
+                                console.log('Signed in as: ' + xhr.responseText);
+                                location.href= "../index.jsp";
+                              };*/
+//                               alert(JSON.stringify(res.properties['nickname']));
+
+                              xhr.send('idtoken=' + res.id + '&nicknametoken=' + res.properties['nickname'] + '&emailtoken=' + res.kakao_account['email'] + '&profile_imagetoken=' + JSON.stringify(res1.profileImageURL));
+                 
+
+                              },
+                              fail: function(error) {
+                                  alert(JSON.stringify(error));
+                                }
+                              }); 
+                              
+              /* xhr = getXMLHttpRequest();
               xhr = new XMLHttpRequest();
               xhr.open('POST', '../KakaoLoginCheck');
               xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
               xhr.onreadystatechange = function() { // onreadystatechange 이벤트 핸들러를 작성함.
 
             	    // 서버상에 문서가 존재하고 요청한 데이터의 처리가 완료되어 응답할 준비가 완료되었을 때
-
             	    if(this.status == 200 && this.readyState == this.DONE) {
 
             	        // 요청한 데이터를 문자열로 반환함.
-            	        
             	    	location.href= "../index.jsp";         
 
-            	    }
+            	    } 
 
             	};
-              /*xhr.onload = function() {
-                console.log('Signed in as: ' + xhr.responseText);
-                location.href= "../index.jsp";
-              };*/
-                xhr.send('idtoken=' + res.id);
-                xhr.send('nicknametoken=' + res.properties['nickname']);
-               /* 
-               https://developers.kakao.com/docs/restapi/tool
-            	   https://antdev.tistory.com/37
-            		   https://okky.kr/article/465143
-               */
+              	//xhr.onload = function() {
+                //console.log('Signed in as: ' + xhr.responseText);
+                //location.href= "../index.jsp";
+              	//};
+              
+              xhr.send('idtoken=' + res.id + '&nicknametoken=' + res.properties['nickname'] + '&emailtoken=' + res.kakao_account['email']);
+  */             
             },
             fail: function(error) {
               alert(JSON.stringify(error));
