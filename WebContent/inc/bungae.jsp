@@ -10,6 +10,7 @@
 	<div id="bungaeButton">
 		<input type="button" name="bungae" id="bungae" value="번개개설" onclick="bungaeInsertToggle()">
 	</div>
+	
 	<div id="bungaeInsert" style="display:none;">
 		<ul>
 			<li><input type="text" name="bungaeName" id="bungaeName" placeholder="번개명"></li>
@@ -30,6 +31,7 @@
 			</ul>
 		<input type="button" value="번개!" onclick="bungaeInsert()">
 	</div>
+	
 	<div id="bungaeList">
 	
 	</div>

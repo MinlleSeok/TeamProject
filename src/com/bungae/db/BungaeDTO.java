@@ -9,6 +9,7 @@ public class BungaeDTO {
 	private String content;
 	private Date bdate;
 	private int max;
+	private int pin;
 	
 	public int getNum() {
 		return num;
@@ -46,6 +47,13 @@ public class BungaeDTO {
 	public void setBdate(Date bdate) {
 		this.bdate = bdate;
 	}
+	public int getPin() {
+		return pin;
+	}
+	public void setPin(int pin) {
+		this.pin = pin;
+	}
+	
 	
 	
 }
