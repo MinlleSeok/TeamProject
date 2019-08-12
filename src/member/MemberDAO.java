@@ -30,6 +30,12 @@ public class MemberDAO {
 	// Memberlevel은 member 함수에 level 항목을 추가하여 수정을 통해 가능하도록 설정.
 	// 정보 열람 시 모든 정보
 	
+	// moim은 쿼리가 자동으로 여러가지 개설 됨  member 항목에 가입된 모임이 적혀잇어야함.
+	// member 테이블에 각각의 모임마다 level이 지정됨
+	
+	 
+	
+	
 	// Level 함수 사용 위한 if 문
 	/*
 	  
@@ -73,16 +79,23 @@ public class MemberDAO {
 //	}
 	
 	//Member list로 변경하기
-	public List<MemberDTO> getBoardList(int startRow int pageSize){
+	// select 문에서는 자기 가입된 모임의 level 1 이상만 select 되도록 표시.
+	
+	//게시판 DB에 저장되어 있는 글목록 검색 해서 반환 하는 메소드
+	public List<MemberDTO> getMemberList(int startRow, int pageSize){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<MemberDTO> dto = new ArrayList<MemberDTO>();
+		List<MemberDTO> memberList = new ArrayList<MemberDTO>();
 		String sql = "";
 		
 		try {
+			//DB접속
 			con = getConn();
-			sql = "select * from board order by re_ref desc, re_seq asc limit ?,?";
+			//SELECT 구문 만들기
+			//정렬 re_ref 내림차순 정렬 검색후, re_seq 오름차순 정렬 검색하는데...
+			//limit -> 각페이지마다 가장위의 첫번째로 보여질 시작글번호, 한페이지당 보여질 글 갯수 
+			sql = "select * from Member order by userLevel desc, joinDate desc limit ?,?";
 			//select구문을 실행할 PreparedStatement실행객체 얻기
 			pstmt = con.prepareStatement(sql);
 			//?문자에 대응 되는 값 셋팅
@@ -93,26 +106,28 @@ public class MemberDAO {
 			
 			while (rs.next()) {
 				//BoardDto객체를 생성하여 DB로부터검색한 글정보를 ReusltSet에서 얻어서 저장
-				BoardDto boardDto = new BoardDto();
-				boardDto.setContent(rs.getString("content"));
-				boardDto.setDate(rs.getTimestamp("date"));
-				boardDto.setIp(rs.getString("ip"));
-				boardDto.setName(rs.getString("name"));
-				boardDto.setNum(rs.getInt("num"));
-				boardDto.setPasswd(rs.getString("passwd"));
-				boardDto.setRe_lev(rs.getInt("re_lev"));
-				boardDto.setRe_ref(rs.getInt("re_ref"));
-				boardDto.setRe_seq(rs.getInt("re_seq"));
-				boardDto.setReadcount(rs.getInt("readcount"));
-				boardDto.setSubject(rs.getString("subject"));
-				boardDto.setFile(rs.getString("file"));
+				MemberDTO MemberDTO = new MemberDTO();
+				MemberDTO.setUserId(rs.getString("UserId"));
+				MemberDTO.setUserEmail(rs.getString("UserEmail"));
+				MemberDTO.setUserNickname(rs.getString("UserNickname"));
+				MemberDTO.setUserGender(rs.getString("UserGender"));
+				MemberDTO.setUserDistrict1(rs.getString("UserDistrict1"));
+				MemberDTO.setUserDistrict2(rs.getString("UserId"));
+				MemberDTO.setUserBirth(rs.getInt("UserBirth"));
+				MemberDTO.setJoinDate(rs.getDate("JoinDate"));
+				MemberDTO.setUserIp(rs.getString("UserIp"));
+				MemberDTO.setUserPhoto(rs.getString("UserPhoto"));
+				MemberDTO.setUserName(rs.getString("UserName"));
+				MemberDTO.setUserLevel(rs.getInt("UserLevel"));
+				MemberDTO.setUserText(rs.getString("UserText"));
+				
 				
 				//BoardDto객체 -> ArrayList에 추가
-				boardList.add(boardDto);
+				memberList.add(MemberDTO);
 			}//while반복문 끝
 				
 		} catch (Exception e) {
-			System.out.println("getBoardList메소드 내부에서 오류 : " + e);
+			System.out.println("getMemberList메소드 내부에서 오류 : " + e);
 		} finally {
 			//자원해제
 			if(rs != null){try{rs.close();}catch(Exception err){err.printStackTrace();}}
@@ -120,8 +135,59 @@ public class MemberDAO {
 			if(con != null){try{con.close();}catch(Exception err){err.printStackTrace();}}												
 		}
 		return boardList; //ArrayList 반환
+		
+	}//getBoardList메소드 끝부분
 	
-
+	
+	public ArrayList getList(String search, String searchText){		
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql="";
+		ArrayList list = new ArrayList();
+		try {
+			//DB접속
+			con = getConn();
+			if(searchText ==null || searchText.isEmpty()){
+			sql = "select * from member";
+			}else{
+				sql="select* from member where " +search + "like '%" + searchText + "%'";			
+			}
+			
+			pstmt=con.prepareStatement(sql);
+			rs=pstmt.executeQuery();
+			while(rs.next()){
+				MemberDTO MemberDTO = new MemberDTO();
+				MemberDTO.setUserId(rs.getString("UserId"));
+				MemberDTO.setUserEmail(rs.getString("UserEmail"));
+				MemberDTO.setUserNickname(rs.getString("UserNickname"));
+				MemberDTO.setUserGender(rs.getString("UserGender"));
+				MemberDTO.setUserDistrict1(rs.getString("UserDistrict1"));
+				MemberDTO.setUserDistrict2(rs.getString("UserId"));
+				MemberDTO.setUserBirth(rs.getInt("UserBirth"));
+				MemberDTO.setJoinDate(rs.getDate("JoinDate"));
+				MemberDTO.setUserIp(rs.getString("UserIp"));
+				MemberDTO.setUserPhoto(rs.getString("UserPhoto"));
+				MemberDTO.setUserName(rs.getString("UserName"));
+				MemberDTO.setUserLevel(rs.getInt("UserLevel"));
+				MemberDTO.setUserText(rs.getString("UserText"));
+			
+				list.add(MemberDTO);
+			
+			}
+		} catch (Exception e) {
+			System.out.println("getlist메소드 오류 : " + e);
+		} finally {
+			//자원해제
+			if(rs != null){try{rs.close();}catch(Exception err){err.printStackTrace();}}
+			if(pstmt != null){try{pstmt.close();}catch(Exception err){err.printStackTrace();}}
+			if(con != null){try{con.close();}catch(Exception err){err.printStackTrace();}}												
+		}
+		return list;
+	}
+	
+		// select 문에서는 자기 가입된 모임의 level 1 이상만 select 되도록 표시.
 	public void Memberinfo(MemberDTO memberdto){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -143,6 +209,10 @@ public class MemberDAO {
 			pstmt.setTimestamp(9, memberdto.getJoinDate());
 			pstmt.setString(10, memberdto.getUserIp());
 			pstmt.setString(11, memberdto.getUserPhoto());
+			pstmt.setString(12, memberdto.getUserName());
+			pstmt.setInt(13, memberdto.getUserLevel());
+			pstmt.setString(14, memberdto.getUserText());
+			
 			
 			
 			pstmt.executeUpdate();

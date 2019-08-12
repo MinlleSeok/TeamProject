@@ -20,8 +20,29 @@ public class MemberDTO {
 	private Timestamp joinDate;
 	private String userIp;
 	private String userPhoto;
+	private String userName;
+	private int userLevel;
+	private String userText;
 	
 	
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public int getUserLevel() {
+		return userLevel;
+	}
+	public void setUserLevel(int userLevel) {
+		this.userLevel = userLevel;
+	}
+	public String getUserText() {
+		return userText;
+	}
+	public void setUserText(String userText) {
+		this.userText = userText;
+	}
 	public int getUserNum() {
 		return userNum;
 	}
