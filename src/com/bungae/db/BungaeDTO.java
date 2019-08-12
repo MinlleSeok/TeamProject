@@ -1,14 +1,15 @@
-package com.bungae.beans;
+package com.bungae.db;
 
 import java.sql.Date;
 
-public class Bungae {
+public class BungaeDTO {
 	private int num;
 	private int mmNum;
 	private String subject;
 	private String content;
 	private Date bdate;
 	private int max;
+	private int pin;
 	
 	public int getNum() {
 		return num;
@@ -46,6 +47,13 @@ public class Bungae {
 	public void setBdate(Date bdate) {
 		this.bdate = bdate;
 	}
+	public int getPin() {
+		return pin;
+	}
+	public void setPin(int pin) {
+		this.pin = pin;
+	}
+	
 	
 	
 }

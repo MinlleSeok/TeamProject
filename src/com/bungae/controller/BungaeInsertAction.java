@@ -1,43 +1,75 @@
 package com.bungae.controller;
 
+import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.sql.Date;
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import com.action.Action;
 import com.action.ActionForward;
-import com.bungae.beans.Bungae;
-import com.bungae.beans.BungaeDAO;
+import com.bungae.db.BungaeDTO;
+import com.bungae.db.BungaeDAO;
 
 public class BungaeInsertAction implements Action {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
 		
 		String jsonStr = request.getParameter("x");
+		System.out.println(jsonStr);
+		
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObj = (JSONObject)parser.parse(jsonStr);
-		String bungaeName = (String)jsonObj.get("bungaeName");
+		System.out.println(jsonObj);
+		
+		System.out.println(URLDecoder.decode(jsonObj.get("bungaeName").toString(),"UTF-8"));
+		System.out.println(jsonObj.get("bungaeName").toString());
+		
+		System.out.println((String)jsonObj.get("bungaeName"));
+		
+		
+		String bungaeName = jsonObj.get("bungaeName").toString();
 		String bungaeRef = (String)jsonObj.get("bungaeRef");
-		String bungaeDate = (String)jsonObj.get("ungaeDate");
+		Date bungaeDate = Date.valueOf((String) jsonObj.get("bungaeDate"));
+		//SimpleDateFormat date = new SimpleDateFormat();
+		//Date date2 = (Date) date.parseObject(bungaeDate);  
 		String bungaeMax = (String)jsonObj.get("bungaeMax");
 		
+		
 		BungaeDAO bdao = new BungaeDAO();
-		Bungae bean = new Bungae();
-		bean.setSubject(bungaeName);
-		bean.setMmNum(1);
-		bean.setContent(bungaeRef);
-		bean.setMax(Integer.parseInt(bungaeMax));
+		BungaeDTO bdto = new BungaeDTO();
+		ActionForward forward = new ActionForward();
+		
+		bdto.setSubject(bungaeName);
+		bdto.setMmNum(1);
+		bdto.setContent(bungaeRef);
+		bdto.setBdate(bungaeDate);
+		bdto.setMax(Integer.parseInt(bungaeMax));
 		
 		
-		bdao.insertBungae(bean);
+		boolean result = bdao.insertBungae(bdto);
+		if(result == true){
+			
+				
+				forward.setRedirect(false);
+				forward.setPath("#");
+
+			
+		}
 		
-		
-		return null;
+		return forward;
 	}
 
 }
