@@ -1,4 +1,4 @@
-package member;
+package moim;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +18,7 @@ import moim.Action;
 import moim.ActionForward;
 
 
-public class MemberServlet extends HttpServlet {
+public class MoimServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {doProcess(request,response);System.out.println("�ΰ�");}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {doProcess(request,response);System.out.println("������Ʈ");}
@@ -43,21 +43,28 @@ public class MemberServlet extends HttpServlet {
 		// 요청주소(command)에 따라 작업 처리 시작하기
 		
 		// 회원가입 메인 연결(userJoin.me)////////////////////////////////////////////////////////////////////
-	if(command.equals("/userJoin.me")){
+	if(command.equals("/moimContent.mo")){
 		//페이지 이동방식 선택(true=리다이렉트, false=디스패치(경로 노툴안함))
 		forward=new ActionForward();
 		forward.setRedirect(false);		
-		forward.setPath("./member/userJoin.jsp");  //이동할 페이지 경로 주소값 저장(회원가입 입력 페이지)
+		forward.setPath("./moim/moimContent.jsp");  //이동할 페이지 경로 주소값 저장(회원가입 입력 페이지)
 		
 		
-// ���������� ����(mm.me)////////////////////////////////////////////////////////////////////	
-	}else if(command.equals("/mm.me")){
-		//������ �̵���� ����(true=�����̷�Ʈ, false=����ġ(��� �������))
+// moimContent.mo(모임정보 페이지 이동)////////////////////////////////////////////////////////////////////	
+	}else if(command.equals("/moimInfo.mo")){
 		forward=new ActionForward();
 		forward.setRedirect(false);
-		
-		//�̵��� ������ ��� �ּҰ� ����
+		forward.setPath("./moim/moimContent.jsp?pageCall=moimInfo.jsp");		
+
+	}else if(command.equals("/moimContent.me")){
+		forward=new ActionForward();
+		forward.setRedirect(false);
 		forward.setPath("/index.jsp");		
+
+	}else if(command.equals("/moimBoard.mo")){
+		forward=new ActionForward();
+		forward.setRedirect(false);
+		forward.setPath("./moim/moimContent.jsp?pageCall=moimBoard.jsp");		
 
 	}
 	

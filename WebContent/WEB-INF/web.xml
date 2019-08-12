@@ -60,4 +60,14 @@
   	<url-pattern>/NaverLoginCheck</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+	<servlet-name>MoimServlet</servlet-name>
+	<servlet-class>moim.MoimServlet</servlet-class>
+ </servlet>    
+ <servlet-mapping>
+	<servlet-name>MoimServlet</servlet-name>
+ 	<url-pattern>*.mo</url-pattern>
+ </servlet-mapping>
+  
+  
 </web-app>
