@@ -1,0 +1,72 @@
+<div class="thunderMoim">
+		<div class="calendarBox">
+			<span>토요일</span> <span>15</span>
+		</div>
+		<span>[정모] 치맥 모임 블라블라블라블라블라다라더랃</span> <span class="positionIcon"></span>
+		<span>서면 네네치킨</span> <span class="clockIcon"></span> <span>19:30</span>
+
+		<span class="personIcon"></span> <span>10명</span>
+
+		<div class="profileWrap">
+			<img class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/woman.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg">
+		</div>
+
+	</div>
+
+
+	<div class="thunderMoim">
+		<div class="calendarBox">
+			<span>토요일</span> <span>15</span>
+		</div>
+		<span>[정모] 치맥 모임 블라블라블라블라블라다라더랃</span> <span class="positionIcon"></span>
+		<span>서면 네네치킨</span> <span class="clockIcon"></span> <span>19:30</span>
+
+		<span class="personIcon"></span> <span>10명</span>
+
+		<div class="profileWrap">
+			<img class="profilePhoto35" src="<%=path%>/images/woman.jpg">
+
+		</div>
+
+	</div>
+	<div class="thunderMoim">
+		<div class="calendarBox">
+			<span>토요일</span> <span>15</span>
+		</div>
+		<span>[정모] 치맥 모임 블라블라블라블라블라다라더랃</span> <span class="positionIcon"></span>
+		<span>서면 네네치킨</span> <span class="clockIcon"></span> <span>19:30</span>
+
+		<span class="personIcon"></span> <span>10명</span>
+
+		<div class="profileWrap">
+			<img class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg"> <img
+				class="profilePhoto35" src="<%=path%>/images/man.jpg">
+		</div>
+
+	</div>

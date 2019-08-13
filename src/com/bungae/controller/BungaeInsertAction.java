@@ -1,14 +1,14 @@
 package com.bungae.controller;
 
-import java.io.PrintWriter;
+
 import java.net.URLDecoder;
-import java.sql.Date;
-import java.util.ArrayList;
+
+import java.sql.Timestamp;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -39,10 +39,10 @@ public class BungaeInsertAction implements Action {
 		
 		System.out.println((String)jsonObj.get("bungaeName"));
 		
-		
+		String bungaeDate2 = ((String) jsonObj.get("bungaeDate")) + " " + ((String) jsonObj.get("bungaeHour")) + ":" + ((String) jsonObj.get("bungaeMinute")) + ":00";
 		String bungaeName = jsonObj.get("bungaeName").toString();
 		String bungaeRef = (String)jsonObj.get("bungaeRef");
-		Date bungaeDate = Date.valueOf((String) jsonObj.get("bungaeDate"));
+		Timestamp bungaeDate = Timestamp.valueOf(bungaeDate2);
 		//SimpleDateFormat date = new SimpleDateFormat();
 		//Date date2 = (Date) date.parseObject(bungaeDate);  
 		String bungaeMax = (String)jsonObj.get("bungaeMax");

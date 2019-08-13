@@ -55,7 +55,7 @@ public class BungaeDAO {
 				pstmt.setString(2, bean.getSubject());
 				pstmt.setString(3, bean.getContent());
 				pstmt.setInt(4, bean.getMax());
-				pstmt.setDate(5, bean.getBdate());
+				pstmt.setTimestamp(5, bean.getBdate());
 				int success = pstmt.executeUpdate();
 				if(success > 0) {
 					check = true;
@@ -83,7 +83,7 @@ public class BungaeDAO {
 				
 				while(rs.next()){
 					bdto = new BungaeDTO();
-					bdto.setBdate(rs.getDate("bdate"));
+					bdto.setBdate(rs.getTimestamp("bdate"));
 					bdto.setContent(rs.getString("content"));
 					bdto.setMax(rs.getInt("max"));
 					bdto.setMmNum(rs.getInt("mmNum"));
@@ -114,7 +114,7 @@ public class BungaeDAO {
 				
 				while(rs.next()){
 					bdto = new BungaeDTO();
-					bdto.setBdate(rs.getDate("bdate"));
+					bdto.setBdate(rs.getTimestamp("bdate"));
 					bdto.setContent(rs.getString("content"));
 					bdto.setMax(rs.getInt("max"));
 					bdto.setMmNum(rs.getInt("mmNum"));

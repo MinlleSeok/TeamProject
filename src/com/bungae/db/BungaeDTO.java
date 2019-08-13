@@ -1,13 +1,13 @@
 package com.bungae.db;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class BungaeDTO {
 	private int num;
 	private int mmNum;
 	private String subject;
 	private String content;
-	private Date bdate;
+	private Timestamp bdate;
 	private int max;
 	private int pin;
 	
@@ -41,10 +41,10 @@ public class BungaeDTO {
 	public void setMax(int max) {
 		this.max = max;
 	}
-	public Date getBdate() {
+	public Timestamp getBdate() {
 		return bdate;
 	}
-	public void setBdate(Date bdate) {
+	public void setBdate(Timestamp bdate) {
 		this.bdate = bdate;
 	}
 	public int getPin() {
