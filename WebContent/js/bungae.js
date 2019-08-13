@@ -67,6 +67,9 @@ function printBungaeList(mmNum){
 	xhttp.onreadystatechange = function() {
 		if(this.readyState == 4 && this.status == 200) {
 			
+			////////////////////////////////
+			
+			
 			var objj = JSON.parse(this.responseText);
 			var list = document.getElementById("bungaeList");
 			list.innerHTML = "";
@@ -92,11 +95,15 @@ function printBungaeList(mmNum){
 
 		}
 	};
+	
+	
+	////////////////////
+	
 	xhttp.open("POST", path+"/list.bg?t="+ new Date(), true);
 	xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
 	xhttp.send("mmNum="+mmNum);
 	
-	
+	//////////////
 }
 
 //var check = false;

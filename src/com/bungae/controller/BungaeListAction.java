@@ -28,6 +28,7 @@ public class BungaeListAction implements Action {
 		ArrayList<BungaeDTO> bungaeList = bdao.selectBungae(mmNum);
 		
 		JSONObject obj = new JSONObject();
+		
 			JSONArray jArray = new JSONArray();//배열이 필요할때
 			for (int i = 0; i < bungaeList.size(); i++)//배열
 			{
