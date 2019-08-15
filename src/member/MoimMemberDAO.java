@@ -22,41 +22,53 @@ public class MoimMemberDAO {
 		return con;
 	}
 	
-	public int insertMoimMember(int Moim_Num , int Usernum){
+	public int insertMoimMember(int Moim_Num , int Usernum, int Level){
 		Connection con = null;
-		PreparedStatement pstmt = null;
+		PreparedStatement pstmt1 = null;
 		PreparedStatement pstmt2 = null;
-		PreparedStatement pstmt3 = null;
 		ResultSet rs=null;
 		String sql="";
 		int check=0;
 		try {
 			con = getConn();
 			
-			sql="select * from member where userNum=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, Usernum);
-			rs = pstmt.executeQuery();
+//			sql="select * from member where userNum=?";
+//			pstmt = con.prepareStatement(sql);
+//			pstmt.setInt(1, Usernum);
+//			rs = pstmt.executeQuery();
+//			
+//			sql="select * from moim where Moim_Num=?";
+//			pstmt2 = con.prepareStatement(sql);
+//			pstmt2.setInt(1, Moim_Num);
+//			rs = pstmt2.executeQuery(); 
+//			
+//			sql="insert into moimuser(Moim_Num,UserNum,Level) values(?,?,1)";
+//			pstmt3 = con.prepareStatement(sql);			
+//			pstmt3.setInt(1, Moim_Num);
+//			pstmt3.setInt(2, Usernum);
+//			pstmt3.setInt(3, Level);
+//			check=pstmt3.executeUpdate();
 			
+			sql="insert into moimuser values(Moim_Num,UserNum)"
+					+ "select userNum from member where userNum=2"
+					+ "select Moim_Num from moim where Moim_Num=1";
+			pstmt1= con.prepareStatement(sql);
+			pstmt1.setInt(1, Moim_Num);
+			pstmt1.setInt(2, Usernum);
+			rs = pstmt1.executeQuery();
+			check=pstmt1.executeUpdate();
 			
-			sql="select * from moim where Moim_Num=?";
-			pstmt2 = con.prepareStatement(sql);
-			pstmt2.setInt(1, Moim_Num);
-			rs = pstmt2.executeQuery(); 
+			sql="insert into moimuser(Level) value(1)";
+			pstmt2= con.prepareStatement(sql);
+			pstmt2.setInt(1, Level);
+			check=pstmt2.executeUpdate();
 			
-		
-			sql="insert into moimuser(Moim_Num,UserNum) values(?,?)";
-			pstmt3 = con.prepareStatement(sql);			
-			pstmt3.setInt(1, Moim_Num);
-			pstmt3.setInt(2, Usernum);
-			check=pstmt3.executeUpdate();
 			
 		} catch (Exception e) {
 			System.out.println("insertMember 오류");
 		} finally {
-			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
-			if(pstmt2!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
-			if(pstmt3!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+			if(pstmt1!=null){try {pstmt1.close();} catch (Exception err) {err.printStackTrace();}}
+			if(pstmt2!=null){try {pstmt2.close();} catch (Exception err) {err.printStackTrace();}}
 			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
 			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
 			

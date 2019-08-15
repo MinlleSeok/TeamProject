@@ -68,16 +68,23 @@ public class MemberServlet extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-	}else if(command.equals("/board/MemberinfoPro.me")){
+	}else if(command.equals("/MemberinfoPro.me")){
 		forward=new ActionForward();
 		forward.setRedirect(false);
 		forward.setPath("./board/MemberinfoPro.jsp");
 		
-	}else if(command.equals("/member/MoimMemberjoinPro.me")){
+	}else if(command.equals("/MoimMemberjoinPro.me")){
 		forward=new ActionForward();
 		forward.setRedirect(false);
-		forward.setPath("./member/MoimMemberjoinPro.jsp");		
+		forward.setPath("./member/MoimMemberjoinPro.jsp");	
+		
+	}else if(command.equals("/MoimMemberjoin.me")){
+		forward=new ActionForward();
+		forward.setRedirect(false);
+		forward.setPath("./member/MoimMemberjoin.jsp");		
 	}
+	
+	
 	
 	
 	

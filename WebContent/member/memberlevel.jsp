@@ -1,3 +1,5 @@
+<%@page import="member.MoimMemberDAO"%>
+<%@page import="member.MoimMemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,9 +9,32 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
 
-	<form action="MoimMemberjoinPro.jsp" method="post">
-	<input type="submit" value="가입">
-	</form>
+		request.setCharacterEncoding("UTF-8");
+		MoimMemberBean mmdto = new MoimMemberBean();
+		MoimMemberDAO mmdao = new MoimMemberDAO();
+
+		int Level = mmdto.getLevel();
+
+if(){
+	%>
+		
+	
+	<%
+}
+
+%>
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

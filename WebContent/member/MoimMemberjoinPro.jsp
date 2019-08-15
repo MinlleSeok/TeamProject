@@ -12,12 +12,13 @@
 	<%
 	
 	int Moim_Num = Integer.parseInt(request.getParameter("Moim_Num"));
-	int Usernum = Integer.parseInt(request.getParameter("Usernum"));
+	int Usernum = Integer.parseInt(request.getParameter("UserNum"));
+	int Level = Integer.parseInt(request.getParameter("Level"));
 	
 	MoimMemberDAO dao = new MoimMemberDAO();
 	
-	int insert = dao.insertMoimMember(Moim_Num, Usernum);
-		if(insert==1){
+	int check = dao.insertMoimMember(Moim_Num, Usernum, Level);
+		if(check==1){
 %>	
 	
 	<script type="text/javascript">

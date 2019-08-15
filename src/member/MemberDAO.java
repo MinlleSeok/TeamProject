@@ -68,8 +68,6 @@ public class MemberDAO {
 			//DB접속
 			con = getConn();
 			//SELECT 구문 만들기
-			//정렬 re_ref 내림차순 정렬 검색후, re_seq 오름차순 정렬 검색하는데...
-			//limit -> 각페이지마다 가장위의 첫번째로 보여질 시작글번호, 한페이지당 보여질 글 갯수 
 			sql = "select * from Member order by userLevel desc, joinDate desc limit ?,?";
 			//select구문을 실행할 PreparedStatement실행객체 얻기
 			pstmt = con.prepareStatement(sql);
@@ -113,7 +111,7 @@ public class MemberDAO {
 		
 	}//getBoardList메소드 끝부분
 	
-	
+	//검색.
 	public ArrayList getList(String search, String searchText){		
 		
 		Connection con = null;

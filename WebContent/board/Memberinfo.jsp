@@ -44,7 +44,7 @@
 <div id="memberinfo">
 	<article>
 	<h1>회원목록</h1>
-	<form action="MemberinfoPro.me" method="post">
+	<form action="/MemberinfoPro.me" method="post">
 		<div id=memberindex>
 			<table border="1">
 				<tr>
@@ -70,7 +70,9 @@
 				<td>회원지역2</td>
 				<td>회원가입일</td>
 				<td>회원아이피</td>
-				<td>회원level</td>
+				<td><a href="../member/memberlevel.jsp"
+						onclick="window.open(this.href, '_blank', 'width=100px,height=100px,toolbars=no,menubar=no,location=no,scrollbars=no,status=no,resizeable=no');return false;">
+						멤버level</a></td>
 				<td>회원간단소개</td>
 				</tr>
 				<tr>
