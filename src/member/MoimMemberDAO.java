@@ -25,7 +25,6 @@ public class MoimMemberDAO {
 	public int insertMoimMember(int Moim_Num , int Usernum, int Level){
 		Connection con = null;
 		PreparedStatement pstmt1 = null;
-		PreparedStatement pstmt2 = null;
 		ResultSet rs=null;
 		String sql="";
 		int check=0;
@@ -48,27 +47,22 @@ public class MoimMemberDAO {
 //			pstmt3.setInt(2, Usernum);
 //			pstmt3.setInt(3, Level);
 //			check=pstmt3.executeUpdate();
-			
-			sql="insert into moimuser values(Moim_Num,UserNum)"
-					+ "select userNum from member where userNum=2"
-					+ "select Moim_Num from moim where Moim_Num=1";
+			System.out.println("1");
+			sql="insert into moimuser(Moim_Num,UserNum,Level) values((select Moim_Num from moim where Moim_Num=1),"
+					+ "(select userNum from member where userNum=2),1)";
 			pstmt1= con.prepareStatement(sql);
 			pstmt1.setInt(1, Moim_Num);
 			pstmt1.setInt(2, Usernum);
+			pstmt1.setInt(3, Level);
 			rs = pstmt1.executeQuery();
 			check=pstmt1.executeUpdate();
-			
-			sql="insert into moimuser(Level) value(1)";
-			pstmt2= con.prepareStatement(sql);
-			pstmt2.setInt(1, Level);
-			check=pstmt2.executeUpdate();
+			System.out.println("12");
 			
 			
 		} catch (Exception e) {
 			System.out.println("insertMember 오류");
 		} finally {
 			if(pstmt1!=null){try {pstmt1.close();} catch (Exception err) {err.printStackTrace();}}
-			if(pstmt2!=null){try {pstmt2.close();} catch (Exception err) {err.printStackTrace();}}
 			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
 			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
 			

@@ -1,4 +1,5 @@
-<%@page import="member.MoimMemberBean"%>
+<%@page import="member.MemberDTO"%>
+<%@page import="member.MoimMemberBean" %>
 <%@page import="member.MoimMemberDAO"%>
 <%@page import="member.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -9,6 +10,8 @@
 	%>    
 		<jsp:useBean id="Bean" class="member.MoimMemberBean"/>
 		<jsp:setProperty property="*" name="Bean"/>
+		<jsp:useBean id="Dto" class="member.MemberDTO"/>
+		<jsp:setProperty property="*" name="Dto"/>
 	<%
 	
 	int Moim_Num = Integer.parseInt(request.getParameter("Moim_Num"));
