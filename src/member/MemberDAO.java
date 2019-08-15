@@ -7,7 +7,6 @@ import java.util.List;
 import javax.naming.*;
 import javax.sql.DataSource;
 
-import board.BoardDto;
 
 public class MemberDAO {
 	
@@ -51,37 +50,13 @@ public class MemberDAO {
 	
 	
 	
-//	public void MemberLevel(MemberDTO memberdto){
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		String sql="";
-//		
-//		try {
-//			con = getConn();
-//			sql="update member set userLevel=? where userId";
-//			pstmt = con.prepareStatement(sql);
-	
-
-//			pstmt.setInt(1, memberdto.getUserLevel());	
-//			pstmt.setString (2, memberdto.getuserId());
-//			
-//			
-//			
-//			pstmt.executeUpdate();
-//			
-//		} catch (Exception e) {
-//			System.out.println("MemberLevel 오류");
-//		} finally {
-//			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
-//			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}			
-//			
-//		}
-//	}
 	
 	//Member list로 변경하기
 	// select 문에서는 자기 가입된 모임의 level 1 이상만 select 되도록 표시.
 	
-	//게시판 DB에 저장되어 있는 글목록 검색 해서 반환 하는 메소드
+	
+	
+	//게시판 DB에 저장되어 있는 회원목록 검색 해서 반환 하는 메소드
 	public List<MemberDTO> getMemberList(int startRow, int pageSize){
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -114,7 +89,7 @@ public class MemberDAO {
 				MemberDTO.setUserDistrict1(rs.getString("UserDistrict1"));
 				MemberDTO.setUserDistrict2(rs.getString("UserId"));
 				MemberDTO.setUserBirth(rs.getInt("UserBirth"));
-				MemberDTO.setJoinDate(rs.getDate("JoinDate"));
+				MemberDTO.setJoinDate(rs.getTimestamp("JoinDate"));
 				MemberDTO.setUserIp(rs.getString("UserIp"));
 				MemberDTO.setUserPhoto(rs.getString("UserPhoto"));
 				MemberDTO.setUserName(rs.getString("UserName"));
@@ -134,7 +109,7 @@ public class MemberDAO {
 			if(pstmt != null){try{pstmt.close();}catch(Exception err){err.printStackTrace();}}
 			if(con != null){try{con.close();}catch(Exception err){err.printStackTrace();}}												
 		}
-		return boardList; //ArrayList 반환
+		return getMemberList(startRow, pageSize); //ArrayList 반환
 		
 	}//getBoardList메소드 끝부분
 	
@@ -166,7 +141,7 @@ public class MemberDAO {
 				MemberDTO.setUserDistrict1(rs.getString("UserDistrict1"));
 				MemberDTO.setUserDistrict2(rs.getString("UserId"));
 				MemberDTO.setUserBirth(rs.getInt("UserBirth"));
-				MemberDTO.setJoinDate(rs.getDate("JoinDate"));
+				MemberDTO.setJoinDate(rs.getTimestamp("JoinDate"));
 				MemberDTO.setUserIp(rs.getString("UserIp"));
 				MemberDTO.setUserPhoto(rs.getString("UserPhoto"));
 				MemberDTO.setUserName(rs.getString("UserName"));
