@@ -10,6 +10,12 @@ import javax.sql.DataSource;
 
 public class MoimMemberDAO {
 
+	Connection con = null;
+	PreparedStatement pstmt = null;
+	PreparedStatement pstmt1= null;
+	ResultSet rs=null;
+	String sql="";
+	
 	private Connection getConn() throws Exception{
 		
 		Connection con = null;
@@ -23,28 +29,26 @@ public class MoimMemberDAO {
 	}
 	
 	
-	public int UpdataLevel(){
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs=null;
-		String sql="";
+	public int UpdataLevel(int Level){
+		int check=0;
 		try {
 			con=getConn();
+			sql="update moimuser set Level =?";
+			pstmt= con.prepareStatement(sql);
+			pstmt.setInt(1, Level);
+			check = pstmt.executeUpdate();
 		} catch (Exception e) {
-			
+			System.out.println("UpdateLevel 오류");
 		} finally {
 			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
 			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
 			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
 		}
-		
+		return check;
 	}
 	
 	public int insertMoimMember(int Moim_Num , int Usernum, int Level){
-		Connection con = null;
-		PreparedStatement pstmt1 = null;
-		ResultSet rs=null;
-		String sql="";
+		
 		int check=0;
 		try {
 			con = getConn();
@@ -66,11 +70,9 @@ public class MoimMemberDAO {
 //			pstmt3.setInt(3, Level);
 //			check=pstmt3.executeUpdate();
 			System.out.println(1);
-			sql="insert into moimuser(Moim_Num,UserNum,Level) values((select Moim_Num from moim where Moim_Num=?),"
-					+ "(select userNum from member where userNum=?),1)";
+			sql="insert into moimuser(Moim_Num,UserNum,Level) values((select Moim_Num from moim where Moim_Num=1),"
+					+ "(select userNum from member where userNum=2),1)";
 			pstmt1= con.prepareStatement(sql);
-			pstmt1.setInt(1, Moim_Num);
-			pstmt1.setInt(2, Usernum);
 			check=pstmt1.executeUpdate();
 			
 			

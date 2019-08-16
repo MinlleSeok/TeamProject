@@ -21,12 +21,16 @@ public class MemberServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {doProcess(request,response);System.out.println("������Ʈ");}
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;char=utf-8");
+		
 		System.out.println("서블릿 작동");
 		
 		// 요청한 가상주소값 얻기(컨텍스트 패스포함주소-컨텍스트길이 = 순수 경로)
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		int contextPathLength= contextPath.length();
+		
 		String command = RequestURI.substring(contextPathLength);// 전체주소에서 요청주소만 잘라낸 결과
 		System.out.println("1:"+RequestURI);
 		System.out.println("2:"+contextPath);
@@ -68,20 +72,13 @@ public class MemberServlet extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-	}else if(command.equals("/MemberinfoPro.me")){
-		forward=new ActionForward();
-		forward.setRedirect(false);
-		forward.setPath("./board/MemberinfoPro.jsp");
-		
-	}else if(command.equals("/MoimMemberjoinPro.me")){
-		forward=new ActionForward();
-		forward.setRedirect(false);
-		forward.setPath("./member/MoimMemberjoinPro.jsp");	
-		
-	}else if(command.equals("/MoimMemberjoin.me")){
-		forward=new ActionForward();
-		forward.setRedirect(false);
-		forward.setPath("./member/MoimMemberjoin.jsp");		
+	}else if(command.equals("/member/MoimMemberjoinAction.me")){
+		action=new MoimMemberjoinAction();
+		try{
+			forward=action.execute(request, response);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	

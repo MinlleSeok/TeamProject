@@ -17,9 +17,12 @@
 
 		int Level = mmdto.getLevel();
 
-if(){
+if(Level==3){
 	%>
+		<form action="memberlevelAction.me" method="post">
+		<input type="button">
 		
+		</form>
 	
 	<%
 }

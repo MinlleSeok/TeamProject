@@ -20,14 +20,14 @@
 		joindto dto = new joindto();
 
 		int count = dao.getMemberCount(); 
-		int memberSize=20;
-		String pageNum = request.getParameter("pageNum");
+		int memberSize=10;
+		 String pageNum = request.getParameter("pageNum");
 		if(pageNum == null){
 			pageNum = "1";
 		}
 		int currentPage = Integer.parseInt(pageNum);
 		int startRow = (currentPage - 1) * memberSize;
-		
+		 
 		
 	 	List<joindto> list = null;
 		 if(count > 0){
@@ -56,13 +56,13 @@
 				<td>회원생일</td>
 				</tr>
 				<tr>
-				<td colspan="2" rowspan="3"><%=dto.getUserPhoto()%></td>
-				<td><%=dto.getUserName()%></td>
-				<td><%=dto.getUserId() %></td>
-				<td><%=dto.getUserEmail() %></td>
-				<td><%=dto.getUserNickname() %></td>
-				<td><%=dto.getUserGender() %></td>
-				<td><%=dto.getUserBirth() %></td>
+				<td colspan="2" rowspan="3"><%=dto3.getUserPhoto()%></td>
+				<td><%=dto3.getUserName()%></td>
+				<td><%=dto3.getUserId() %></td>
+				<td><%=dto3.getUserEmail()%></td>
+				<td><%=dto3.getUserNickname()%></td>
+				<td><%=dto3.getUserGender()%></td>
+				<td><%=dto3.getUserBirth()%></td>
 				</tr>
 				<tr>
 				<td>회원지역1</td>
@@ -75,12 +75,12 @@
 				<td>회원간단소개</td>
 				</tr>
 				<tr>
-				<td><%=dto.getUserDistrict1() %></td>
-				<td><%=dto.getUserDistrict2() %></td>
-				<td><%=dto.getJoinDate() %></td>
-				<td><%=dto.getUserIp() %></td>
-				<td><%=dto.getLevel() %></td>
-				<td><%=dto.getUserText() %></td>
+				<td><%=dto3.getUserDistrict1() %></td>
+				<td><%=dto3.getUserDistrict2() %></td>
+				<td><%=dto3.getJoinDate() %></td>
+				<td><%=dto3.getUserIp() %></td>
+				<td><%=dto3.getLevel() %></td>
+				<td><%=dto3.getUserText() %></td>
 				</tr>
 			</table>
 			<%

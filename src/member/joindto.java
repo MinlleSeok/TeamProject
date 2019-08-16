@@ -16,8 +16,15 @@ public class joindto {
 	private String userIp;
 	private String userPhoto;
 	private String userName;
-	private int userLevel;
+	private String userText;
+	private int Level;
 	
+	public int getLevel() {
+		return Level;
+	}
+	public void setLevel(int level) {
+		Level = level;
+	}
 	public int getUserNum() {
 		return userNum;
 	}
@@ -96,24 +103,13 @@ public class joindto {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public int getUserLevel() {
-		return userLevel;
-	}
-	public void setUserLevel(int userLevel) {
-		this.userLevel = userLevel;
-	}
+
 	public String getUserText() {
 		return userText;
 	}
 	public void setUserText(String userText) {
 		this.userText = userText;
 	}
-	public int getLevel() {
-		return Level;
-	}
-	public void setLevel(int level) {
-		Level = level;
-	}
-	private String userText;
-	private int Level;
+	
+	
 }

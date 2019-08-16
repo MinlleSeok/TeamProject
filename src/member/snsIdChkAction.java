@@ -61,7 +61,7 @@ public class snsIdChkAction implements Action {
 	
 		forward.setPath("mm.me");
 		
-		return null;
+		return forward;
 	}
 
 }

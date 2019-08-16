@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,15 +8,18 @@
 </head>
 <body>
 	
+	<%
+	request.setCharacterEncoding("UTF-8");
+	response.setContentType("text/html;char=utf-8");
+	%>
 	
-	
-	<form action="MoimMemberjoinPro.jsp" method="post">
+	<form action="MoimMemberjoinAction.me" method="post">
 	<input type="hidden" name="Moim_Num" value="3">
 	<input type="hidden" name="UserNum" value="3">
 	<input type="hidden" name="Level" value="1">
 	
-	
 	<input type="submit" value="가입">
 	</form>
+	
 </body>
 </html>

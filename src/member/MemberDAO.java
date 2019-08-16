@@ -118,16 +118,14 @@ public class MemberDAO {
 				joindto.setUserNickname(rs.getString("UserNickname"));
 				joindto.setUserGender(rs.getString("UserGender"));
 				joindto.setUserDistrict1(rs.getString("UserDistrict1"));
-				joindto.setUserDistrict2(rs.getString("UserId"));
+				joindto.setUserDistrict2(rs.getString("UserDistrict2"));
 				joindto.setUserBirth(rs.getInt("UserBirth"));
 				joindto.setJoinDate(rs.getTimestamp("JoinDate"));
 				joindto.setUserIp(rs.getString("UserIp"));
 				joindto.setUserPhoto(rs.getString("UserPhoto"));
 				joindto.setUserName(rs.getString("UserName"));
-				
 				joindto.setUserText(rs.getString("UserText"));
-				
-				
+				joindto.setLevel(rs.getInt("Level"));
 				//BoardDto객체 -> ArrayList에 추가
 				memberList.add(joindto);
 			}//while반복문 끝
@@ -140,12 +138,12 @@ public class MemberDAO {
 			if(pstmt != null){try{pstmt.close();}catch(Exception err){err.printStackTrace();}}
 			if(con != null){try{con.close();}catch(Exception err){err.printStackTrace();}}												
 		}
-		return getMemberList(startRow, memberSize); //ArrayList 반환
+		return memberList; //ArrayList 반환
 		
 	}//getBoardList메소드 끝부분
 	
 	//검색.
-	public ArrayList getList(String search, String searchText){		
+	/*public ArrayList getList(String search, String searchText){		
 		
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -192,8 +190,11 @@ public class MemberDAO {
 		}
 		return list;
 	}
+	*/
+	
 	
 		// select 문에서는 자기 가입된 모임의 level 1 이상만 select 되도록 표시.
+	
 	public void Memberinfo(MemberDTO memberdto){
 		Connection con = null;
 		PreparedStatement pstmt = null;
