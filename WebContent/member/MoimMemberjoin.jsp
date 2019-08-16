@@ -7,8 +7,15 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	
+	
+	
 	<form action="MoimMemberjoinPro.jsp" method="post">
+	<input type="hidden" name="Moim_Num" value="3">
+	<input type="hidden" name="UserNum" value="3">
+	<input type="hidden" name="Level" value="1">
+	
+	
 	<input type="submit" value="가입">
 	</form>
 </body>

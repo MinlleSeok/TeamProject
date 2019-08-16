@@ -14,10 +14,12 @@
 		<jsp:setProperty property="*" name="Dto"/>
 	<%
 	
+	
+	
+	
 	int Moim_Num = Integer.parseInt(request.getParameter("Moim_Num"));
 	int Usernum = Integer.parseInt(request.getParameter("UserNum"));
-	int Level = Integer.parseInt(request.getParameter("Level"));
-	
+	int Level=0;
 	MoimMemberDAO dao = new MoimMemberDAO();
 	
 	int check = dao.insertMoimMember(Moim_Num, Usernum, Level);
