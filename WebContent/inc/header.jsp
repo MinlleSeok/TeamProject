@@ -9,7 +9,7 @@
 <header class="header">		
 	<div class="headerWrap">
 		<h1>
-			<a href="#">mmProject</a>
+			<a href="./mm.me">mmProject</a>
 		</h1>
 		
 		<nav class="headLeft">

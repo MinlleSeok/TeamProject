@@ -103,7 +103,7 @@ $(document).ready(function(){
 
 			 	 
 			 	<button class="clickBtn kakao mouseHand" onclick="agreeCheck2()">카카오톡으로 가입하기</button>
-			 	<button class="clickBtn naver mouseHand" onclick="agreeCheck()">네이버로 가입하기</button>
+			 	<jsp:include page="../inc/naver.jsp"/>	
 			 	<button class="clickBtn google mouseHand" onclick="agreeCheck()">google로 가입하기</button>
 			 	<a class="clickBtn idJoin mouseHand" onclick="agreeCheck1()">아이디로 가입하기</a>
 			 	

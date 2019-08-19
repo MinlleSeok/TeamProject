@@ -2,12 +2,7 @@ package member;
 
 import java.sql.Timestamp;
 
-//DTO 클래스의 목적
-	//1.회원가입 정보를 각 변수에 저장하여 DB에 insert 용도의 클래스
-	//2.DB로 부터 회원정보를 검색한 후 검색한 데이터를 저장할 용도의 클래스
-
-public class MemberDTO {
-	
+public class joindto {
 	private int userNum;
 	private String userId;
 	private String userPwd;
@@ -21,28 +16,14 @@ public class MemberDTO {
 	private String userIp;
 	private String userPhoto;
 	private String userName;
-	private int userLevel;
 	private String userText;
 	private int Level;
 	
-	
-	public String getUserName() {
-		return userName;
+	public int getLevel() {
+		return Level;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public int getUserLevel() {
-		return userLevel;
-	}
-	public void setUserLevel(int userLevel) {
-		this.userLevel = userLevel;
-	}
-	public String getUserText() {
-		return userText;
-	}
-	public void setUserText(String userText) {
-		this.userText = userText;
+	public void setLevel(int level) {
+		Level = level;
 	}
 	public int getUserNum() {
 		return userNum;
@@ -116,8 +97,19 @@ public class MemberDTO {
 	public void setUserPhoto(String userPhoto) {
 		this.userPhoto = userPhoto;
 	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
+	public String getUserText() {
+		return userText;
+	}
+	public void setUserText(String userText) {
+		this.userText = userText;
+	}
 	
 	
-
 }

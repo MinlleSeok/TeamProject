@@ -21,18 +21,21 @@ public class MemberServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {doProcess(request,response);System.out.println("������Ʈ");}
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;char=utf-8");
+		
 		System.out.println("서블릿 작동");
 		
 		// 요청한 가상주소값 얻기(컨텍스트 패스포함주소-컨텍스트길이 = 순수 경로)
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		int contextPathLength= contextPath.length();
+		
 		String command = RequestURI.substring(contextPathLength);// 전체주소에서 요청주소만 잘라낸 결과
 		System.out.println("1:"+RequestURI);
 		System.out.println("2:"+contextPath);
 		System.out.println("3:"+contextPathLength);
 		System.out.println("command최종형태:"+command);
-		
 		//doProcess 전역변수 선언
 		ActionForward forward = null;
 		Action action=null;		
@@ -47,26 +50,48 @@ public class MemberServlet extends HttpServlet {
 		forward.setPath("./member/userJoin.jsp");  //이동할 페이지 경로 주소값 저장(회원가입 입력 페이지)
 		
 		
-// ���������� ����(mm.me)////////////////////////////////////////////////////////////////////	
-	}else if(command.equals("/mm.me")){
-		//������ �̵���� ����(true=�����̷�Ʈ, false=����ġ(��� �������))
+	}else if(command.equals("/member/mm.me")){
+		System.out.println("mm.me 들어옴");
 		forward=new ActionForward();
 		forward.setRedirect(false);
 		
-		//�̵��� ������ ��� �ּҰ� ����
-		forward.setPath("/index.jsp");		
+		forward.setPath("../index.jsp");		
 
+	}else if(command.equals("/login.me")){
+		forward=new ActionForward();
+		forward.setRedirect(false);
+		//이동할 페이지 경로 주소값 저장
+		forward.setPath("./member/login.jsp");
+		
+		
+	}else if(command.equals("/member/snsIdChkAction.me")){
+		action=new snsIdChkAction();
+		
+		try {
+			forward=action.execute(request, response);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}else if(command.equals("/member/MoimMemberjoinAction.me")){
+		action=new MoimMemberjoinAction();
+		try{
+			forward=action.execute(request, response);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	
-	// ������� ó�� (������)////////////////////////////////////////////////////////////////////
+	
+	
+	
 	if(forward!=null){
 		if(forward.isRedirect()){
 			response.sendRedirect(forward.getPath());
-		}else{//����ġ ������� ������ ��� ���� ���� ������
+		}else{
 			RequestDispatcher dispatcher=request.getRequestDispatcher(forward.getPath());
 			dispatcher.forward(request, response);}
 		
-	}// ������� if ����		
-} // doProcess() ����	
-} // ���� ����
+	}		
+} 
+} 

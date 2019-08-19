@@ -47,14 +47,15 @@ $(document).ready(function(){
 <body>
 
 <!-- 헤더영역 -->
+
 	<jsp:include page="inc/header.jsp"/>
+	
 	
 <div class="bodyWrap">
 
 <!------------------------------- 왼쪽 사이드 부분 ------------------------------------>
 	
 <div class="bodyWrapLeft">
-	
 	<%-- <!-- 메인 슬라이드 -->	
 		<jsp:include page="inc/mainSlide.jsp"/>	 --%>
 	<!-- 인기 갤러리 -->	
@@ -65,6 +66,8 @@ $(document).ready(function(){
 		<jsp:include page="inc/dogKindBoard.jsp"/>		
 	<!-- 오늘의 조회수 베스트 -->		
 		<jsp:include page="inc/bestClick.jsp"/>	
+		
+		
 	
 </div>
 	
@@ -76,8 +79,11 @@ $(document).ready(function(){
 	<!-- 오른쪽 구역 2. 오늘의 인기 사진 -->	
 		<jsp:include page="inc/todayPic.jsp"/>	
 </div>	
+	<div id="abc">
 
-
+			<a href="member/MoimMemberjoin.jsp"><input type="button" value="가입" id="abcd"></a>
+		
+	</div>
 
 <!-- ------------------------------------푸터영역---------------------------------- -->
 		<jsp:include page="inc/footer.jsp"/>
