@@ -144,6 +144,22 @@ public class BungaeFrontController extends HttpServlet {
 			}
 
 		}
+		
+		// 번개 참여유저 갱신
+				// 연결(user.bg)////////////////////////////////////////////////////////////////////
+				if (command.equals("/asdasd.bg")) {
+					// 페이지 이동방식 선택(true=리다이렉트, false=디스패치(경로 노툴안함))
+					action = new MoinListAction();
+
+					try {
+						forward = action.execute(request, response);
+						return;
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
 
 		// 번개 참여유저 갱신
 		// 연결(user.bg)////////////////////////////////////////////////////////////////////
