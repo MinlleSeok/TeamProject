@@ -3,6 +3,10 @@ package member;
 import java.sql.Timestamp;
 
 public class joindto {
+	private int NUM;
+	
+	private int num;
+	private int Moim_Num;	
 	private int userNum;
 	private String userId;
 	private String userPwd;
@@ -18,7 +22,35 @@ public class joindto {
 	private String userName;
 	private String userText;
 	private int Level;
+	private int userCount;
 	
+	
+	
+	public int getUserCount() {
+		return userCount;
+	}
+	public void setUserCount(int userCount) {
+		this.userCount = userCount;
+	}
+	public int getNUM() {
+		return NUM;
+	}
+	public void setNUM(int nUM) {
+		NUM = nUM;
+	}
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	
+	public int getMoim_Num() {
+		return Moim_Num;
+	}
+	public void setMoim_Num(int moim_Num) {
+		Moim_Num = moim_Num;
+	}
 	public int getLevel() {
 		return Level;
 	}

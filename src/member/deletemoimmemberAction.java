@@ -6,34 +6,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class MoimMemberjoinAction implements Action {
+public class deletemoimmemberAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("4444");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 		ActionForward forward = new ActionForward();
 		PrintWriter out = response.getWriter();
 		HttpSession session=request.getSession();
 		
-		joindto dto = new joindto();
-		//response.setCharacterEncoding("UTF-8");
-		int Moim_Num = Integer.parseInt(request.getParameter("Moim_Num"));
-		int Usernum = Integer.parseInt(request.getParameter("UserNum"));
-		int Level=0;
-		int UserCount=0;
-		
 		MoimMemberDAO dao = new MoimMemberDAO();
+		joindto joindto = new joindto();
 		
-		int check = dao.insertMoimMember(Moim_Num, Usernum, Level,UserCount);
+		int NUM = Integer.parseInt(request.getParameter("NUM"));
+//		int UserCount = Integer.parseInt(request.getParameter("UserCount"));
+		
+		int check = dao.deletemoimmember(NUM);
+		
+		System.out.println("2");
+		
 		if(check==1){
-			forward.setPath("MoimMemberjoin.jsp?Moim_Num="+Moim_Num+"&UserNum="+Usernum);
-			forward.setRedirect(false);
+			forward.setPath("Memberinfo.jsp");
+			forward.setRedirect(true);
 		}
-	
-	
-		
-		
 		
 		
 		

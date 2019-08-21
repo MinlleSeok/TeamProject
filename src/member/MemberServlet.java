@@ -22,7 +22,7 @@ public class MemberServlet extends HttpServlet {
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;char=utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		
 		System.out.println("서블릿 작동");
 		
@@ -75,6 +75,14 @@ public class MemberServlet extends HttpServlet {
 	}else if(command.equals("/member/MoimMemberjoinAction.me")){
 		action=new MoimMemberjoinAction();
 		try{
+			forward=action.execute(request, response);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+	}else if(command.equals("/member/deletemoimmemberAction.me")){
+		action=new deletemoimmemberAction();
+		try{
+			System.out.println("3");
 			forward=action.execute(request, response);
 		}catch (Exception e) {
 			// TODO: handle exception

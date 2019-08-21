@@ -113,6 +113,9 @@ public class MemberDAO {
 			while (rs.next()) {
 				//BoardDto객체를 생성하여 DB로부터검색한 글정보를 ReusltSet에서 얻어서 저장
 				joindto joindto = new joindto();
+				joindto.setNUM(rs.getInt("NUM"));
+				joindto.setNum(rs.getInt("Num"));
+				joindto.setMoim_Num(rs.getInt("Moim_Num"));
 				joindto.setUserId(rs.getString("UserId"));
 				joindto.setUserEmail(rs.getString("UserEmail"));
 				joindto.setUserNickname(rs.getString("UserNickname"));
