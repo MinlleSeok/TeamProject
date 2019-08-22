@@ -44,24 +44,7 @@
                       
                      if(idChk=="noId"){ //DB에 아이디가 없을 경우 => 회원가입
                           alert("회원가입중...");
-                          /* $.ajax({
-                              url : "userJoin.me",
-                              method : "POST",
-                              headers : {
-                                "Accept" : "application/json",
-                                "Content-Type" : "application/json"
-                              },
-                              data : JSON.stringify({
-                                  userId : id,
-                                userName : nickname,
-                                password : "naver123",
-                              }),
-                              success : function(JSONData){
-                                 alert("회원가입이 정상적으로 되었습니다.");
-                                 window.close();
-                                 top.opener.location="/user/snsLogin/"+id;
-                              }
-                          }) */
+                          
                       }
                       if(idChk=="yesId"){ //DB에 아이디가 존재할 경우 => 로그인
                     	  alert("로그인중"); 

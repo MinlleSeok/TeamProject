@@ -95,6 +95,14 @@ public class MemberServlet extends HttpServlet {
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
+	}else if(command.equals("/member/moimmemberlevelAction.me")){
+		action=new moimmemberlevelAction();
+		try{
+			System.out.println("5");
+			forward=action.execute(request, response);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	

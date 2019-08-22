@@ -10,7 +10,6 @@ public class deletemoimmemberAction implements Action{
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("4444");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 		ActionForward forward = new ActionForward();
@@ -19,7 +18,6 @@ public class deletemoimmemberAction implements Action{
 		
 		MoimMemberDAO dao = new MoimMemberDAO();
 		joindto joindto = new joindto();
-		
 		int NUM = Integer.parseInt(request.getParameter("NUM"));
 		
 		int check = dao.deletemoimmember(NUM);

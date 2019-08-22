@@ -91,6 +91,11 @@
 					<input type="hidden" value=<%=dto3.getNUM()%> name="NUM1">					
 					<input type="submit" value="<%=dto3.getusercount()%>번 경고">	
 				</form>
+				<form action="moimmemberlevelAction.me?Level=<%=dto3.getLevel()%>" method="post">
+					<input type="hidden"value=<%=dto3.getNUM()%> name="NUM">
+					<input type="submit" value="levelup">		
+				
+				</form>
 			<%		}
 				} %>
 		<div class="clear"></div>

@@ -9,6 +9,8 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class MoimMemberDAO {
+	
+	//alert 구현, levelup 구현
 
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -41,6 +43,30 @@ public class MoimMemberDAO {
 			check = pstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e+"deletemoimmember 오류");
+		} finally {
+			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+		}
+		return check;
+	}
+	
+	public int memberlevelup(int Level, int NUM){
+		int check =0;
+		try {
+			System.out.println("!");
+			con=getConn();
+			if(Level==0){
+				sql="update moimuser set level=1 where NUM=?";
+			}else if(Level==1){
+				sql="update moimuser set level=2 where NUM=?";
+			}
+			
+			pstmt= con.prepareStatement(sql);
+			pstmt.setInt(1, NUM);
+			check = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("memberlevelup 오류"+e);
 		} finally {
 			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
 			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
@@ -143,7 +169,7 @@ public class MoimMemberDAO {
 //			check=pstmt3.executeUpdate();
 			System.out.println(1);
 			sql="insert into moimuser(Moim_Num,UserNum,Level,usercount) values((select Moim_Num from moim where Moim_Num=1),"
-					+ "(select userNum from member where userNum=2),1,0)";
+					+ "(select userNum from member where userNum=2),0,0)";
 			pstmt1= con.prepareStatement(sql);
 			check=pstmt1.executeUpdate();
 			
