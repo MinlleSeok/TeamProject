@@ -129,6 +129,7 @@ public class MemberDAO {
 				joindto.setUserName(rs.getString("UserName"));
 				joindto.setUserText(rs.getString("UserText"));
 				joindto.setLevel(rs.getInt("Level"));
+				joindto.setusercount(rs.getInt("usercount"));
 				//BoardDto객체 -> ArrayList에 추가
 				memberList.add(joindto);
 			}//while반복문 끝

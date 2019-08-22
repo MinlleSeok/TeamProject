@@ -22,15 +22,15 @@ public class joindto {
 	private String userName;
 	private String userText;
 	private int Level;
-	private int userCount;
+	private int usercount;
 	
 	
 	
-	public int getUserCount() {
-		return userCount;
+	public int getusercount() {
+		return usercount;
 	}
-	public void setUserCount(int userCount) {
-		this.userCount = userCount;
+	public void setusercount(int usercount) {
+		this.usercount = usercount;
 	}
 	public int getNUM() {
 		return NUM;

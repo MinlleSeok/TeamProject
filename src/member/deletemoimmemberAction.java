@@ -21,11 +21,9 @@ public class deletemoimmemberAction implements Action{
 		joindto joindto = new joindto();
 		
 		int NUM = Integer.parseInt(request.getParameter("NUM"));
-//		int UserCount = Integer.parseInt(request.getParameter("UserCount"));
 		
 		int check = dao.deletemoimmember(NUM);
 		
-		System.out.println("2");
 		
 		if(check==1){
 			forward.setPath("Memberinfo.jsp");

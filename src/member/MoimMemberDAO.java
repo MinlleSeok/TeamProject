@@ -15,6 +15,7 @@ public class MoimMemberDAO {
 	PreparedStatement pstmt1= null;
 	ResultSet rs=null;
 	String sql="";
+	joindto joindto = new joindto();
 	// ajax로 값넘기기 연습 (이건 나머지 다하고 천천히)
 	private Connection getConn() throws Exception{
 		
@@ -48,28 +49,54 @@ public class MoimMemberDAO {
 		return check;
 	}
 	
-	public int deletemoimmember1(int UserCount){
-		int check1 =0;
+	public int deletemoimmember1(int usercount,int NUM1){
+		int check =0;
 		try {
-			System.out.println(UserCount);
-			System.out.println("usercount1");
+			System.out.println("!");
 			con=getConn();
-			if(UserCount==3){
-			sql="delete from moimuser where NUM=?";			
-			pstmt= con.prepareStatement(sql);
-			check1 = pstmt.executeUpdate();
-			}else{
-				UserCount+=1;
+			if(usercount==3){
+			sql="delete from moimuser where NUM=?";		
+			}else if(usercount==0){
+				sql="update moimuser set usercount=1 where NUM=?";
+			}else if(usercount==1){
+				sql="update moimuser set usercount=2 where NUM=?";
+			}else if(usercount==2){
+				sql="update moimuser set usercount=3 where NUM=?";			
 			}
+			
+			pstmt= con.prepareStatement(sql);
+			pstmt.setInt(1, NUM1);
+			check = pstmt.executeUpdate();
 		} catch (Exception e) {
-			System.out.println(e+"deletemoimmember 오류");
+			System.out.println("deletemoimmember1 오류"+e);
 		} finally {
 			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
 			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
 			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
 		}
-		return check1;
+		return check;
 	}
+//	public int usercount(int usercount){
+//		int check =0;
+//		try {
+//			con=getConn();
+//			sql="select usercount from moimuser";
+//			pstmt1= con.prepareStatement(sql);
+//			rs = pstmt1.executeQuery();
+//			System.out.println(usercount);
+//			if(rs.next()){
+//				joindto.setusercount(rs.getInt("usercount"));
+//				
+//			}
+//		} catch (Exception e) {
+//			System.out.println("usercount 오류"+e);
+//		} finally {
+//			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+//			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+//			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+//		}
+//		return check;
+//	}
 	
 	
 

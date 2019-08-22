@@ -10,15 +10,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script>
-function NUM(){
-	document.getElementById("NUM").action = "/deletemoimmemberAction.me";
-	document.getElementById("NUM").submit();
-}
-
-
-
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -56,7 +47,7 @@ function NUM(){
 					joindto dto3 = list.get(i);	
 				%>
 		
-			<form action="deletemoimmemberAction1.me?UserCount="<%=dto3.getUserCount()%> method="post">
+			<form action="deletemoimmemberAction.me" method="post">
 					<table border="1">
 						<tr>
 						<td colspan="2">회원사진</td>
@@ -93,10 +84,13 @@ function NUM(){
 						<td><%=dto3.getUserText() %></td>
 						</tr>
 					</table>
-					<input type="hidden" value=<%=dto3.getNUM()%> name="NUM">	
-					<input type="button" value="<%=dto3.getUserCount()%>번 경고">				
-					<input type="Button" value="강퇴하기" onclick="NUM()">
-					</form>
+					<input type="hidden" value=<%=dto3.getNUM()%> name="NUM">			
+					<input type="submit" value="강퇴하기">
+				</form>
+				<form action="deletemoimmemberAction1.me?usercount=<%=dto3.getusercount()%>" method="post">	
+					<input type="hidden" value=<%=dto3.getNUM()%> name="NUM1">					
+					<input type="submit" value="<%=dto3.getusercount()%>번 경고">	
+				</form>
 			<%		}
 				} %>
 		<div class="clear"></div>

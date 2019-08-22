@@ -82,6 +82,14 @@ public class MemberServlet extends HttpServlet {
 	}else if(command.equals("/member/deletemoimmemberAction.me")){
 		action=new deletemoimmemberAction();
 		try{
+			System.out.println("5");
+			forward=action.execute(request, response);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+	}else if(command.equals("/member/deletemoimmemberAction1.me")){
+		action=new deletemoimmemberAction1();
+		try{
 			System.out.println("3");
 			forward=action.execute(request, response);
 		}catch (Exception e) {
