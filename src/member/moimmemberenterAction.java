@@ -6,8 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class MoimMemberjoinAction implements Action {
-
+public class moimmemberenterAction implements Action{
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
@@ -15,29 +14,24 @@ public class MoimMemberjoinAction implements Action {
 		ActionForward forward = new ActionForward();
 		PrintWriter out = response.getWriter();
 		HttpSession session=request.getSession();
-		joindto dto = new joindto();
-		//response.setCharacterEncoding("UTF-8");
-		int Moim_Num = Integer.parseInt(request.getParameter("Moim_Num"));
-		int Usernum = Integer.parseInt(request.getParameter("UserNum"));
-		int Level=0;
-		int UserCount=0;
-		int enter=0;
 		
 		MoimMemberDAO dao = new MoimMemberDAO();
 		
-		int check = dao.insertMoimMember(Moim_Num, Usernum, Level,UserCount,enter);
-		if(check==1){
-			forward.setPath("MoimMemberjoin.jsp?Moim_Num="+Moim_Num+"&UserNum="+Usernum);
-			forward.setRedirect(false);
-		}
-	
-	
-		
-		
-		
-		
-		
-		return forward;
-	}
+		joindto joindto = new joindto();
 
+		System.out.println("11111");
+		int NUM = Integer.parseInt(request.getParameter("NUM"));
+		int enter = Integer.parseInt(request.getParameter("enter"));
+		
+		int check = dao.memberenter(enter, NUM);
+		
+		
+		if(check==1){
+			forward.setPath("Memberinfo.jsp");
+			forward.setRedirect(true);
+		}
+		
+
+	return forward;
+	}
 }

@@ -48,7 +48,39 @@ public class MemberDAO {
 	 
 	 */
 	
-	
+	public int getMemberCount1(){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "";
+		//DB로부터 검색한 전체글개수를 저장할 변수 
+		int count1 = 0;
+		
+		try {
+			//커넥션풀로부터 커넥션 얻기
+			con = getConn();//DB접속
+			//전체 글개수 검색 SQL문 
+			sql = "select count(*) from moimuser where enter=0";
+			//SQL문을 실행할 실행 객체 얻기
+			pstmt = con.prepareStatement(sql);
+			//SQL문을 실행하여 검색한 글의 갯수 정보를  ResultSet에 저장하여 
+			//ResultSet을 반환
+			rs = pstmt.executeQuery();
+			//ResultSet객체 내부에 검색한 글의 갯수 정보가 존재하면?
+			if(rs.next()){
+				//검색한 글의 갯수 정보를 count변수에 저장
+				count1 = rs.getInt(1);						
+			}		
+		} catch (Exception e) {
+			System.out.println("getMemberCount1()메소드 내부 오류 : " + e);
+		} finally {
+			//자원해제
+			if(rs != null){try{rs.close();}catch(Exception err){err.printStackTrace();}}
+			if(pstmt != null){try{pstmt.close();}catch(Exception err){err.printStackTrace();}}
+			if(con != null){try{con.close();}catch(Exception err){err.printStackTrace();}}							
+		}	
+		return count1;//검색한 글의 갯수 정보 반환
+	}
 	
 	
 	//Member list로 변경하기
@@ -65,7 +97,7 @@ public class MemberDAO {
 			//커넥션풀로부터 커넥션 얻기
 			con = getConn();//DB접속
 			//전체 글개수 검색 SQL문 
-			sql = "select count(*) from moimuser";
+			sql = "select count(*) from moimuser where enter=1";
 			//SQL문을 실행할 실행 객체 얻기
 			pstmt = con.prepareStatement(sql);
 			//SQL문을 실행하여 검색한 글의 갯수 정보를  ResultSet에 저장하여 
@@ -101,7 +133,8 @@ public class MemberDAO {
 			//DB접속
 			con = getConn();
 			//SELECT 구문 만들기
-			sql = "select * from Member natural join moimuser order by Level desc, joinDate desc limit ?,?";
+			sql = "select * from Member natural join moimuser where enter=1"
+					+ " order by Level desc, joinDate desc limit ?,?";
 			//select구문을 실행할 PreparedStatement실행객체 얻기
 			pstmt = con.prepareStatement(sql);
 			//?문자에 대응 되는 값 셋팅
@@ -129,7 +162,7 @@ public class MemberDAO {
 				joindto.setUserName(rs.getString("UserName"));
 				joindto.setUserText(rs.getString("UserText"));
 				joindto.setLevel(rs.getInt("Level"));
-				joindto.setusercount(rs.getInt("usercount"));
+				joindto.setUsercount(rs.getInt("usercount"));
 				//BoardDto객체 -> ArrayList에 추가
 				memberList.add(joindto);
 			}//while반복문 끝
@@ -144,7 +177,64 @@ public class MemberDAO {
 		}
 		return memberList; //ArrayList 반환
 		
-	}//getBoardList메소드 끝부분
+	}
+	
+	public List<joindto> getMemberList1(int startRow, int memberSize){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		List<joindto> memberList = new ArrayList<joindto>();
+		String sql = "";
+		
+		try {
+			//DB접속
+			con = getConn();
+			//SELECT 구문 만들기
+			sql = "select * from Member natural join moimuser where enter=0"
+					+ " order by Level desc, joinDate desc limit ?,?";
+			//select구문을 실행할 PreparedStatement실행객체 얻기
+			pstmt = con.prepareStatement(sql);
+			//?문자에 대응 되는 값 셋팅
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, memberSize);
+			//select구문 실행하여 검색한 결과를 ResultSet으로 반환
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				//BoardDto객체를 생성하여 DB로부터검색한 글정보를 ReusltSet에서 얻어서 저장
+				joindto joindto = new joindto();
+				joindto.setNUM(rs.getInt("NUM"));
+				joindto.setNum(rs.getInt("Num"));
+				joindto.setMoim_Num(rs.getInt("Moim_Num"));
+				joindto.setUserId(rs.getString("UserId"));
+				joindto.setUserEmail(rs.getString("UserEmail"));
+				joindto.setUserNickname(rs.getString("UserNickname"));
+				joindto.setUserGender(rs.getString("UserGender"));
+				joindto.setUserDistrict1(rs.getString("UserDistrict1"));
+				joindto.setUserDistrict2(rs.getString("UserDistrict2"));
+				joindto.setUserBirth(rs.getInt("UserBirth"));
+				joindto.setJoinDate(rs.getTimestamp("JoinDate"));
+				joindto.setUserIp(rs.getString("UserIp"));
+				joindto.setUserPhoto(rs.getString("UserPhoto"));
+				joindto.setUserName(rs.getString("UserName"));
+				joindto.setUserText(rs.getString("UserText"));
+				joindto.setLevel(rs.getInt("Level"));
+				joindto.setUsercount(rs.getInt("usercount"));
+				//BoardDto객체 -> ArrayList에 추가
+				memberList.add(joindto);
+			}//while반복문 끝
+				
+		} catch (Exception e) {
+			System.out.println("getMemberList1메소드 내부에서 오류 : " + e);
+		} finally {
+			//자원해제
+			if(rs != null){try{rs.close();}catch(Exception err){err.printStackTrace();}}
+			if(pstmt != null){try{pstmt.close();}catch(Exception err){err.printStackTrace();}}
+			if(con != null){try{con.close();}catch(Exception err){err.printStackTrace();}}												
+		}
+		return memberList; //ArrayList 반환
+		
+	}
 	
 	//검색.
 	/*public ArrayList getList(String search, String searchText){		
@@ -226,7 +316,7 @@ public class MemberDAO {
 			
 			
 			
-			pstmt.executeUpdate();
+			pstmt.executeQuery();
 			
 		} catch (Exception e) {
 			System.out.println("Memberinfo 오류");

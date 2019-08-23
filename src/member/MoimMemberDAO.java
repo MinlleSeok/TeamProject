@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 public class MoimMemberDAO {
 	
-	//alert 구현, levelup 구현
+	//alert 구현
 
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -51,15 +51,37 @@ public class MoimMemberDAO {
 		return check;
 	}
 	
+	public int memberenter(int enter, int NUM){
+		int check =0;
+		try {
+			System.out.println("!@");
+			con=getConn();
+			if(enter==0){
+				sql="update moimuser set enter=1 where NUM=?";
+			}
+			
+			pstmt= con.prepareStatement(sql);
+			pstmt.setInt(1, NUM);
+			check = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("memberenter 오류"+e);
+		} finally {
+			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+		}
+		return check;
+	}
+	
 	public int memberlevelup(int Level, int NUM){
 		int check =0;
 		try {
 			System.out.println("!");
 			con=getConn();
-			if(Level==0){
-				sql="update moimuser set level=1 where NUM=?";
-			}else if(Level==1){
+			if(Level==1){
 				sql="update moimuser set level=2 where NUM=?";
+			}else if(Level==2){
+				sql="update moimuser set level=1 where NUM=?";
 			}
 			
 			pstmt= con.prepareStatement(sql);
@@ -125,27 +147,27 @@ public class MoimMemberDAO {
 //	}
 	
 	
-
-	
-	public int UpdataLevel(int Level){
-		int check=0;
-		try {
-			con=getConn();
-			sql="update moimuser set Level =?";
-			pstmt= con.prepareStatement(sql);
-			pstmt.setInt(1, Level);
-			check = pstmt.executeUpdate();
-		} catch (Exception e) {
-			System.out.println("UpdateLevel 오류");
-		} finally {
-			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
-			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
-			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
-		}
-		return check;
-	}
-	
-	public int insertMoimMember(int Moim_Num , int Usernum, int Level, int UserCount){
+//
+//	
+//	public int UpdataLevel(int Level){
+//		int check=0;
+//		try {
+//			con=getConn();
+//			sql="update moimuser set Level =?";
+//			pstmt= con.prepareStatement(sql);
+//			pstmt.setInt(1, Level);
+//			check = pstmt.executeUpdate();
+//		} catch (Exception e) {
+//			System.out.println("UpdateLevel 오류");
+//		} finally {
+//			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+//			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+//			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+//		}
+//		return check;
+//	}
+	// 대기회원 코드로 변경 일반 회원의 경우 enter 값의 update
+	public int insertMoimMember(int Moim_Num , int Usernum, int Level, int UserCount, int enter){
 		
 		int check=0;
 		try {
@@ -168,8 +190,8 @@ public class MoimMemberDAO {
 //			pstmt3.setInt(3, Level);
 //			check=pstmt3.executeUpdate();
 			System.out.println(1);
-			sql="insert into moimuser(Moim_Num,UserNum,Level,usercount) values((select Moim_Num from moim where Moim_Num=1),"
-					+ "(select userNum from member where userNum=2),0,0)";
+			sql="insert into moimuser(Moim_Num,UserNum,Level,usercount,enter) values((select Moim_Num from moim where Moim_Num=1),"
+					+ "(select userNum from member where userNum=2),1,0,0)";
 			pstmt1= con.prepareStatement(sql);
 			check=pstmt1.executeUpdate();
 			

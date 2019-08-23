@@ -103,6 +103,14 @@ public class MemberServlet extends HttpServlet {
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
+	}else if(command.equals("/member/moimmemberenterAction.me")){
+		action=new moimmemberenterAction();
+		try{
+			System.out.println("88");
+			forward=action.execute(request, response);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	

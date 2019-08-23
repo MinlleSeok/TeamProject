@@ -23,14 +23,21 @@ public class joindto {
 	private String userText;
 	private int Level;
 	private int usercount;
+	private int enter;
 	
 	
 	
-	public int getusercount() {
+	public int getUsercount() {
 		return usercount;
 	}
-	public void setusercount(int usercount) {
+	public void setUsercount(int usercount) {
 		this.usercount = usercount;
+	}
+	public int getEnter() {
+		return enter;
+	}
+	public void setEnter(int enter) {
+		this.enter = enter;
 	}
 	public int getNUM() {
 		return NUM;

@@ -20,6 +20,7 @@
 	<input type="hidden" name="UserNum" value="3">
 	<input type="hidden" name="Level" value="1">
 	<input type="hidden" name="UserCount" value="0">
+	<input type="hidden" name="enter" value="0">
 		
 	<input type="submit" value="가입">
 	</form>
