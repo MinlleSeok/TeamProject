@@ -31,25 +31,7 @@ public class MoimMemberDAO {
 		return con;
 	}
 	
-	public int deletemoimmember(int NUM){
-		int check =0;
-		try {
-			System.out.println(NUM);
-			con=getConn();
-			System.out.println("1");
-			sql="delete from moimuser where NUM=?";			
-			pstmt= con.prepareStatement(sql);
-			pstmt.setInt(1, NUM);
-			check = pstmt.executeUpdate();
-		} catch (Exception e) {
-			System.out.println(e+"deletemoimmember 오류");
-		} finally {
-			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
-			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
-			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
-		}
-		return check;
-	}
+	
 	
 	public int memberenter(int enter, int NUM){
 		int check =0;
@@ -57,7 +39,7 @@ public class MoimMemberDAO {
 			System.out.println("!@");
 			con=getConn();
 			if(enter==0){
-				sql="update moimuser set enter=1 where NUM=?";
+				sql="update moimuser set enter=1 where NUM=? limit = ";
 			}
 			
 			pstmt= con.prepareStatement(sql);
@@ -76,7 +58,6 @@ public class MoimMemberDAO {
 	public int memberlevelup(int Level, int NUM){
 		int check =0;
 		try {
-			System.out.println("!");
 			con=getConn();
 			if(Level==1){
 				sql="update moimuser set level=2 where NUM=?";
@@ -97,24 +78,46 @@ public class MoimMemberDAO {
 		return check;
 	}
 	
+	public int deletemoimmember(int NUM){
+		int check =0;
+		try {
+			System.out.println("NUM="+NUM);
+			con=getConn();
+			sql="delete from moimuser where NUM=?";			
+			sql="update moimuser set enter=2 where NUM=?";			
+			pstmt= con.prepareStatement(sql);
+			pstmt.setInt(1, NUM);
+			check = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println(e+"deletemoimmember 오류");
+		} finally {
+			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+		}
+		return check;
+	}
+	
 	public int deletemoimmember1(int usercount,int NUM1){
 		int check =0;
 		try {
 			System.out.println("!");
 			con=getConn();
 			if(usercount==3){
-			sql="delete from moimuser where NUM=?";		
+			sql="delete from moimuser where NUM=?";
+			sql="update moimuser set enter=2 where NUM=?";
 			}else if(usercount==0){
 				sql="update moimuser set usercount=1 where NUM=?";
 			}else if(usercount==1){
 				sql="update moimuser set usercount=2 where NUM=?";
 			}else if(usercount==2){
 				sql="update moimuser set usercount=3 where NUM=?";			
-			}
-			
+			}									
 			pstmt= con.prepareStatement(sql);
 			pstmt.setInt(1, NUM1);
 			check = pstmt.executeUpdate();
+			
 		} catch (Exception e) {
 			System.out.println("deletemoimmember1 오류"+e);
 		} finally {
@@ -189,7 +192,6 @@ public class MoimMemberDAO {
 //			pstmt3.setInt(2, Usernum);W
 //			pstmt3.setInt(3, Level);
 //			check=pstmt3.executeUpdate();
-			System.out.println(1);
 			sql="insert into moimuser(Moim_Num,UserNum,Level,usercount,enter) values((select Moim_Num from moim where Moim_Num=1),"
 					+ "(select userNum from member where userNum=2),1,0,0)";
 			pstmt1= con.prepareStatement(sql);
@@ -231,5 +233,51 @@ public class MoimMemberDAO {
 			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}			
 			
 		}
+	}
+
+
+
+	public int maxmemberinsert(int point, int maxmember, int Moim_Num, int addmaxmember) {
+		int check =0;
+		try {
+			con=getConn();
+			System.out.println("maxmember="+maxmember);
+			System.out.println("addmaxmember="+addmaxmember);
+			sql="update moim set maxmember= " + (maxmember+addmaxmember) + " where Moim_Num=1";			
+	//		sql="update member set point=" + (point-addpoint) + " where userNum=4";			
+			pstmt= con.prepareStatement(sql);
+	//		pstmt.setInt(1, Moim_Num);
+			check = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("maxmemberinsert 오류"+e);
+		} finally {
+			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+		}
+		return check;
+	}
+
+
+
+	public int selectmaxmember() {
+		int check =0;
+		try {
+			con=getConn();
+			sql="select maxmember from moim where Moim_Num=1";					
+			pstmt= con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				check = rs.getInt(1);
+			}			
+		} catch (Exception e) {
+			System.out.println("selectmaxmember 오류"+e);
+		} finally {
+			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+		}
+		return check;
 	}
 }

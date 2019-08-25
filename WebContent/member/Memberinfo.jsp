@@ -19,9 +19,12 @@
 		MemberDAO dao = new MemberDAO();
 		joindto dto = new joindto();
 		MoimMemberBean bean = new MoimMemberBean();
+		MoimMemberDAO mdao= new MoimMemberDAO(); 
 
 		int count = dao.getMemberCount();
 		int count1 = dao.getMemberCount1();
+
+		int maxmember = mdao.selectmaxmember();
 		
 		int memberSize=10;
 		int memberSize1=10;
@@ -43,12 +46,13 @@
 			list1 = dao.getMemberList1(startRow, memberSize); 
 		}  
 		 if(count > 0){
-			list = dao.getMemberList(startRow, memberSize); 
+			list = dao.getMemberList(startRow1, memberSize1); 
 		}  
 		 int level=dto.getLevel();
 		// if(level>=1){
 		int enter= dto.getEnter();
-			 System.out.println(count1);
+			 System.out.println("count1="+count1);
+			 joindto dto1 = new joindto();
 %>
 
 	
@@ -56,9 +60,12 @@
 	<body>
 	<!-- 운영자만 접속가능한 페이지 .. 강퇴기능/회원정보 이름 나이 닉네임 프로필 사진 보여짐 -->
 	<div id="memberinfo">
-		<article>
+		<article>			
+			<a href="maxmemberinsert.jsp"
+			onclick="window.open(this.href, '_blank', 'width=480px,height=350px,toolbars=no,menubar=no,location=no,scrollbars=no,status=no,resizeable=no');return false;">
+			<input type="button" value="인원 추가"></a>					
+		<h1>회원목록</h1><h1>[ 모임 가입 회원 수 : <%=count%> / <%=maxmember%>]</h1>
 		
-		<h1>회원목록</h1><h1>[ 모임 가입 회원 수 : <%=count%> ]</h1>
 			<div id=memberindex>
 			<%
 				if(count > 0){%>
@@ -135,37 +142,7 @@
 				 %>
 				 
 		<div class="clear"></div>
-			<div id="page_control">
-			<%
-				if(count > 0){ 
-					int pageCount = count / memberSize + (count%memberSize==0 ? 0 : 1);
-					int pageBlock = 4;
-					int startPage = ((currentPage/pageBlock)-(currentPage%pageBlock==0?1:0)) * pageBlock+1;
-					int endPage = startPage + pageBlock -1;
-					if(endPage < pageCount){
-						endPage=pageCount;
-					}
-					if(startPage>pageBlock){
-						%>
-						<a href="Memberinfo.jsp?pageNum=<%=startPage-pageBlock%>">[이전]</a>
-						<%
-					}
-					for(int i=startPage; i<=endPage; i++){
-						%>
-						<a href="Memberinfo.jsp?pageNum=<%=i %>">[<%=i %>]</a>
-						<%
-					}
-					if(endPage<pageCount){
-						%>
-						<a href="Memberinfo.jsp?pageNum=<%=startPage+pageBlock%>">[다음]</a>
-						<%
-					}
-				
-				}
 			
-	//	 }
-			%>
-			</div>
 		</div>	
 		<% 
 		%>
@@ -225,7 +202,8 @@
 					
 					 %>
 							<form action="moimmemberenterAction.me?enter=<%=dto3.getEnter()%>" method="post">
-								<input type="hidden"value=<%=dto3.getNUM()%> name="NUM">
+								<input type="hidden" value=<%=dto3.getNUM()%> name="NUM">
+								
 								<input type="submit" value="가입승인">				
 							</form>
 						<%	//	

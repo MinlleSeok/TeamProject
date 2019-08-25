@@ -24,9 +24,23 @@ public class joindto {
 	private int Level;
 	private int usercount;
 	private int enter;
+	private int maxmember;
+	private int point;
 	
 	
 	
+	public int getMaxmember() {
+		return maxmember;
+	}
+	public void setMaxmember(int maxmember) {
+		this.maxmember = maxmember;
+	}
+	public int getPoint() {
+		return point;
+	}
+	public void setPoint(int point) {
+		this.point = point;
+	}
 	public int getUsercount() {
 		return usercount;
 	}

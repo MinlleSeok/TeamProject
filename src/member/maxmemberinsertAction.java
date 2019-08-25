@@ -6,7 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class moimmemberenterAction implements Action{
+public class maxmemberinsertAction implements Action {
+
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
@@ -14,25 +15,23 @@ public class moimmemberenterAction implements Action{
 		ActionForward forward = new ActionForward();
 		PrintWriter out = response.getWriter();
 		HttpSession session=request.getSession();
-		
 		MoimMemberDAO dao = new MoimMemberDAO();
-		
 		joindto joindto = new joindto();
-
-		System.out.println("11111");
-		int NUM = Integer.parseInt(request.getParameter("NUM"));
-		int enter = Integer.parseInt(request.getParameter("enter"));
-		
-		
-		int check = dao.memberenter(enter, NUM);
-		
+		int point = Integer.parseInt(request.getParameter("point"));		
+		int Moim_Num = Integer.parseInt(request.getParameter("Moim_Num"));
+		int maxmember = Integer.parseInt(request.getParameter("maxmember"));
+		String ten = request.getParameter("ten");
+		int addmaxmember= Integer.parseInt(request.getParameter("addmaxmember"));
+		int check = dao.maxmemberinsert(point, maxmember, Moim_Num, addmaxmember);
 		
 		if(check==1){
-			forward.setPath("Memberinfo.jsp");
+			forward.setPath("maxmemberinsert.jsp");
 			forward.setRedirect(true);
 		}
 		
-
-	return forward;
+		
+		
+		return forward;
 	}
+
 }

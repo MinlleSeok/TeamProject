@@ -122,11 +122,11 @@ public class MemberDAO {
 	
 	
 	//게시판 DB에 저장되어 있는 회원목록 검색 해서 반환 하는 메소드
-	public List<joindto> getMemberList(int startRow, int memberSize){
+	public List<joindto> getMemberList(int startRow1, int memberSize1){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		List<joindto> memberList = new ArrayList<joindto>();
+		List<joindto> memberList1 = new ArrayList<joindto>();
 		String sql = "";
 		
 		try {
@@ -138,8 +138,8 @@ public class MemberDAO {
 			//select구문을 실행할 PreparedStatement실행객체 얻기
 			pstmt = con.prepareStatement(sql);
 			//?문자에 대응 되는 값 셋팅
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, memberSize);
+			pstmt.setInt(1, startRow1);
+			pstmt.setInt(2, memberSize1);
 			//select구문 실행하여 검색한 결과를 ResultSet으로 반환
 			rs = pstmt.executeQuery();
 			
@@ -164,7 +164,7 @@ public class MemberDAO {
 				joindto.setLevel(rs.getInt("Level"));
 				joindto.setUsercount(rs.getInt("usercount"));
 				//BoardDto객체 -> ArrayList에 추가
-				memberList.add(joindto);
+				memberList1.add(joindto);
 			}//while반복문 끝
 				
 		} catch (Exception e) {
@@ -175,7 +175,7 @@ public class MemberDAO {
 			if(pstmt != null){try{pstmt.close();}catch(Exception err){err.printStackTrace();}}
 			if(con != null){try{con.close();}catch(Exception err){err.printStackTrace();}}												
 		}
-		return memberList; //ArrayList 반환
+		return memberList1; //ArrayList 반환
 		
 	}
 	
