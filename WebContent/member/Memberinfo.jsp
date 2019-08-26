@@ -126,14 +126,31 @@
 							<a href="neiBoardDelete.jsp?usercount=<%=dto3.getUsercount()%>&pageNum=<%=pageNum%>"
 							onclick="return confirm('정말 경고 주시겠습니까?')"><input type="submit" value="<%=dto3.getUsercount()%>번 경고"></a>	
 						</form>
-							<%//if(level==3){ %>
+						<%//if(level==3){ %>
+						<%if(dto3.getLevel()==1){ %>
 							<form action="moimmemberlevelAction.me?Level=<%=dto3.getLevel()%>" method="post">
 								<input type="hidden"value=<%=dto3.getNUM()%> name="NUM">
 								<a href="neiBoardDelete.jsp?usercount=<%=dto3.getUsercount()%>&pageNum=<%=pageNum%>"
-							onclick="return confirm('정말 등업 시키시겠습니까?')">
-							<input type="submit" value="levelup">	
-							</a>					
+								onclick="return confirm('정말 등업 시키시겠습니까?')">
+								<input type="submit" value="levelup">		
+								</a>					
 							</form>
+						<%}else if((dto3.getLevel()==2)){ %>
+							<form action="moimmemberlevelAction.me?Level=<%=dto3.getLevel()%>" method="post">
+								<input type="hidden"value=<%=dto3.getNUM()%> name="NUM">
+								<a href="neiBoardDelete.jsp?usercount=<%=dto3.getUsercount()%>&pageNum=<%=pageNum%>"
+								onclick="return confirm('정말 강등 시키시겠습니까?')">
+								<input type="submit" value="levelup">		
+								</a>					
+							</form>						
+						<%} %>
+						<form action="exitAction.me" method="post">
+							<input type="hidden"value=<%=dto3.getNUM()%> name="NUM">
+							<a href="neiBoardDelete.jsp?usercount=<%=dto3.getUsercount()%>&pageNum=<%=pageNum%>"
+							onclick="return confirm('정말 탈퇴하시겠습니까?')">
+							<input type="submit" value="탈퇴하기">		
+							</a>						
+						</form>
 						<%	//	}
 						//	}						
 						}

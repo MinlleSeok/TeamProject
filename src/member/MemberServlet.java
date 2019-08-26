@@ -114,6 +114,13 @@ public class MemberServlet extends HttpServlet {
 		}catch (Exception e) {
 			// TODO: handle exception
 		}
+	}else if(command.equals("/member/exitAction.me")){
+		action=new exitAction();
+		try{
+			forward=action.execute(request, response);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	

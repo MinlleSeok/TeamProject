@@ -10,7 +10,8 @@ import javax.sql.DataSource;
 
 public class MoimMemberDAO {
 	
-	//alert 구현
+	//1.재신청 --> delete --> 자기가 탈퇴했을 때랑 , 모임 마스터가 가입 거절했을 때 , 재 가입할 수 있도록 , --> 구현해야함. O
+	//2.회원 강퇴 --> enter --> 2 자기가 추방당했을때 재가입 불가하게 구현 --> 기존 db에 동일한 usernum과 moimnum이 있을 경우 가입 불가하게..
 
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -83,7 +84,7 @@ public class MoimMemberDAO {
 		try {
 			System.out.println("NUM="+NUM);
 			con=getConn();
-			sql="delete from moimuser where NUM=?";			
+			//sql="delete from moimuser where NUM=?";			
 			sql="update moimuser set enter=2 where NUM=?";			
 			pstmt= con.prepareStatement(sql);
 			pstmt.setInt(1, NUM);
@@ -105,7 +106,6 @@ public class MoimMemberDAO {
 			System.out.println("!");
 			con=getConn();
 			if(usercount==3){
-			sql="delete from moimuser where NUM=?";
 			sql="update moimuser set enter=2 where NUM=?";
 			}else if(usercount==0){
 				sql="update moimuser set usercount=1 where NUM=?";
@@ -192,7 +192,8 @@ public class MoimMemberDAO {
 //			pstmt3.setInt(2, Usernum);W
 //			pstmt3.setInt(3, Level);
 //			check=pstmt3.executeUpdate();
-			sql="insert into moimuser(Moim_Num,UserNum,Level,usercount,enter) values((select Moim_Num from moim where Moim_Num=1),"
+			sql="insert into moimuser(Moim_Num,UserNum,Level,usercount,enter)"
+					+ " values((select Moim_Num from moim where Moim_Num=1),"
 					+ "(select userNum from member where userNum=2),1,0,0)";
 			pstmt1= con.prepareStatement(sql);
 			check=pstmt1.executeUpdate();
@@ -237,20 +238,81 @@ public class MoimMemberDAO {
 
 
 
-	public int maxmemberinsert(int point, int maxmember, int Moim_Num, int addmaxmember) {
+	public int maxmemberinsert(int addmaxmember, int addpoint) {
 		int check =0;
 		try {
 			con=getConn();
-			System.out.println("maxmember="+maxmember);
-			System.out.println("addmaxmember="+addmaxmember);
-			sql="update moim set maxmember= " + (maxmember+addmaxmember) + " where Moim_Num=1";			
-	//		sql="update member set point=" + (point-addpoint) + " where userNum=4";			
+			
+			sql="update moim set maxmember=maxmember+ "+ addmaxmember + " where Moim_Num=1";	
 			pstmt= con.prepareStatement(sql);
-	//		pstmt.setInt(1, Moim_Num);
 			check = pstmt.executeUpdate();
+			
+			sql="update member set point=point " + -addpoint + " where userNum=4";			
+			pstmt1= con.prepareStatement(sql);			
+			check = pstmt1.executeUpdate();
 			
 		} catch (Exception e) {
 			System.out.println("maxmemberinsert 오류"+e);
+		} finally {
+			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+		}
+		return check;
+	}
+	
+	public int selectMoim_Num() {
+		int check =0;
+		try {
+			con=getConn();
+			sql="select Moim_Num from moim";					
+			pstmt= con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				check = rs.getInt(1);
+			}			
+		} catch (Exception e) {
+			System.out.println("selectmoim_Num 오류"+e);
+		} finally {
+			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+		}
+		return check;
+	}
+	
+	public int selectenter() {
+		int check =0;
+		try {
+			con=getConn();
+			sql="select enter from moimuser";					
+			pstmt= con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				check = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println("selectenter 오류"+e);
+		} finally {
+			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+		}
+		return check;
+	}
+	
+	public int selectUsernum() {
+		int check =0;
+		try {
+			con=getConn();
+			sql="select Usernum from member";					
+			pstmt= con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				check = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println("selectUsernum 오류"+e);
 		} finally {
 			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
 			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
@@ -273,6 +335,47 @@ public class MoimMemberDAO {
 			}			
 		} catch (Exception e) {
 			System.out.println("selectmaxmember 오류"+e);
+		} finally {
+			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+		}
+		return check;
+	}
+	public int selectpoint() {
+		int check =0;
+		try {
+			con=getConn();
+			sql="select point from member where userNum=4";					
+			pstmt= con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				check = rs.getInt(1);
+			}			
+		} catch (Exception e) {
+			System.out.println("selectmaxmember 오류"+e);
+		} finally {
+			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
+			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+			if(rs!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
+		}
+		return check;
+	}
+
+
+
+	public int exit(int NUM) {
+		int check =0;
+		try {
+			System.out.println("NUM="+NUM);
+			con=getConn();
+			sql="delete from moimuser where NUM=?";				
+			pstmt= con.prepareStatement(sql);
+			pstmt.setInt(1, NUM);
+			check = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("exit 오류"+e);
 		} finally {
 			if(pstmt!=null){try {pstmt.close();} catch (Exception err) {err.printStackTrace();}}
 			if(con!=null){try {con.close();} catch (Exception err) {err.printStackTrace();}}
